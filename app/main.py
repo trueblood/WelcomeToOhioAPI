@@ -1,7 +1,7 @@
 import requests
 import app.imageocr as ocr
 import app.helper as helper
-from flask import Flask
+from flask import Flask, Response
 
 app = Flask(__name__)
 app.config['SECRET_KEY']="hard to guess string"
@@ -17,3 +17,28 @@ def getApplicantInfo(filename):
     formattedValue = value.replace('\n', ' ')
     info = helper.Helper.find_person_info_from_license(formattedValue)
     return info
+
+@app.route('/xml')
+def getXML():
+    xml_data="""
+    <?xml version="1.0" encoding="utf-8"?>
+<SerioCommands version="1.0">
+<IoCopy>
+	<ScanTray>FB</ScanTray>
+	<Ratio>100</Ratio>
+	<Layout>Normal</Layout>
+	<NumCopies>3</NumCopies>
+	<JobFinAckUrl>./end_message.xml</JobFinAckUrl>
+</IoCopy>
+<DisplayInfo>
+	<Script>
+		<![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+			<UiScreen>
+			    <NullScreen></NullScreen>
+			</UiScreen>
+		]]>
+	</Script>
+</DisplayInfo>
+</SerioCommands>
+    """
+    return Response(xml_data, mimetype='text/xml')
