@@ -63,8 +63,8 @@ def getXML():
     """
     return Response(xml_data, mimetype='text/xml')
 
-@app.route('/xml/<data>', methods=['POST'])
-def getXML(data):
+@app.route('/xml/test/<data>', methods=['POST'])
+def getXMLPage(data):
     xml_data="""
 
 
