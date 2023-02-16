@@ -26,9 +26,9 @@ def getApplicantInfo(filename):
     info = helper.Helper.find_person_info_from_license(formattedValue)
     return info
 
-@app.route('/xml')
-def getXML():
-    print("My message", file=sys.stdout)
+@app.route('/xml/<data>')
+def getXML(data):
+    print(str(data), file=sys.stdout)
     xml_data="""
 <SerioCommands version="1.0">
       <DisplayForm>
