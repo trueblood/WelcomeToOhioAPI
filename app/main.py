@@ -26,7 +26,7 @@ def getApplicantInfo(filename):
     info = helper.Helper.find_person_info_from_license(formattedValue)
     return info
 
-@app.route('/xml/<data>')
+@app.route('/xml/<data>', methods=['POST'])
 def getXML(data):
     print(str(data), file=sys.stdout)
     xml_data="""
