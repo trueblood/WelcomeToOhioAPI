@@ -21,32 +21,27 @@ def getApplicantInfo(filename):
 @app.route('/xml')
 def getXML():
     xml_data="""
-<?xml version="1.0" encoding="utf-8"?>
-<SerioCommands version="1.0">
-      <IoScanAndSend>
-         <TxProfiles>
-			<Media>
-				<MediaParams>
-					<FileName>scan2usb</FileName>
-				</MediaParams>
-			</Media>
-         </TxProfiles>
-         <ScanTray>ADF</ScanTray>
-         <ColorMode>Color</ColorMode>
-         <Resolution>Normal</Resolution>
-         <FileType>PDF</FileType>
-         <FileNameFixed>true</FileNameFixed>
-         <JobFinAckUrl>http://example.bsi.com/jobfin</JobFinAckUrl>
-      </IoScanAndSend>
-   <DisplayInfo>
+<SerioCommands version="v009">
+   <DisplayForm>
       <Script>
-         <![CDATA[<?xml version="1.0" encoding="UTF-8"?>
-         <UiScreen >
-                    <NullScreen></NullScreen>
+         <![CDATA[
+         <UiScreen>
+            <Title>EitherOr Select</Title>
+            <LinkScreen>
+               <Description>Please select "Yes" or "No"</Description>
+               <EitherOrControl>
+                  <ItemY href="./8.xml">
+                     <Label>Yes</Label>
+                  </ItemY>
+                  <ItemN href="./0.xml"> 
+                     <Label>No</Label>
+                  </ItemN>
+               </EitherOrControl>
+            </LinkScreen>
          </UiScreen>
          ]]>
-      </Script> 
-   </DisplayInfo>
+      </Script>
+   </DisplayForm>
 </SerioCommands>
 
     """
