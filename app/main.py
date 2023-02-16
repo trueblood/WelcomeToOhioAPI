@@ -2,9 +2,16 @@ import requests
 import app.imageocr as ocr
 import app.helper as helper
 from flask import Flask, Response
+from logging.handlers import RotatingFileHandler
+import logging
 
 app = Flask(__name__)
 app.config['SECRET_KEY']="hard to guess string"
+
+
+handler = RotatingFileHandler('app.log', maxBytes=10000, backupCount=1)
+handler.setLevel(logging.INFO)
+app.logger.addHandler(handler)
 
 @app.route('/')
 def hello_world():
@@ -20,6 +27,7 @@ def getApplicantInfo(filename):
 
 @app.route('/xml/<data>')
 def getXML(data):
+    app.logger.info('Hello World')
     xml_data="""
 <SerioCommands version="1.0">
       <DisplayForm>
