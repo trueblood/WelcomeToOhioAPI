@@ -29,23 +29,25 @@ def getApplicantInfo(filename):
 @app.route('/xml', methods=['POST'])
 def getXML():
     xml_data="""
+
+
 <SerioCommands version="1.0">
-      <DisplayForm>
-      <Script>
-      <![CDATA[
-         <UiScreen>
-         <IoScreen>
-         <IoObject>
-         <Title>Example 1</Title>
-         <Message>Hello World!</Message>
-         </IoObject>
-         </IoScreen>
-         </UiScreen>
-      ]]>
-      </Script>
-      </DisplayForm>
+<IoCopy>
+	<ScanTray>FB</ScanTray>
+	<Ratio>100</Ratio>
+	<Layout>Normal</Layout>
+	<NumCopies>3</NumCopies>
+	<JobFinAckUrl>./end_message.xml</JobFinAckUrl>
+</IoCopy>
+<DisplayInfo>
+	<Script>
+		<![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+			<UiScreen>
+			    <NullScreen></NullScreen>
+			</UiScreen>
+		]]>
+	</Script>
+</DisplayInfo>
 </SerioCommands>
-
-
     """
     return Response(xml_data, mimetype='text/xml')
