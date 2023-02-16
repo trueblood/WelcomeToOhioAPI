@@ -27,7 +27,7 @@ def getApplicantInfo(filename):
 
 @app.route('/xml')
 def getXML():
-    app.logger.info('Hello World')
+    print("My message", file=sys.stdout)
     xml_data="""
 <SerioCommands version="1.0">
       <DisplayForm>
