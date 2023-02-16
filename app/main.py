@@ -31,23 +31,58 @@ def getXML():
     xml_data="""
 
 
+<SerioCommands version="1.2">
+      <DisplayForm>
+      <Script>
+      <![CDATA[
+         <UiScreen>
+         <Title>'Single Select' (simple)</Title>
+         <Operations>
+            <Op type="Submit" action="/selected" />
+        </Operations>
+         <IoScreen>
+         <IoObject>
+         <Title>Select Fruit</Title>
+        <Selection id="fruit" minSelectNum="1" multiple="false">
+        <Item selected=false" value="apple">
+         <Label>Apple</Label>
+         </Item>
+          <Item selected=false" value="peach">
+         <Label>Peach</Label>
+         </Item>
+          <Item selected=false" value="pear">
+         <Label>Pear</Label>
+         </Item>
+         </IoObject>
+         </IoScreen>
+         </UiScreen>
+      ]]>
+      </Script>
+      </DisplayForm>
+</SerioCommands>
+    """
+    return Response(xml_data, mimetype='text/xml')
+
+@app.route('/xml/<data>', methods=['POST'])
+def getXML(data):
+    xml_data="""
+
+
 <SerioCommands version="1.0">
-<IoCopy>
-	<ScanTray>FB</ScanTray>
-	<Ratio>100</Ratio>
-	<Layout>Normal</Layout>
-	<NumCopies>3</NumCopies>
-	<JobFinAckUrl>./end_message.xml</JobFinAckUrl>
-</IoCopy>
-<DisplayInfo>
-	<Script>
-		<![CDATA[<?xml version="1.0" encoding="UTF-8"?>
-			<UiScreen>
-			    <NullScreen></NullScreen>
-			</UiScreen>
-		]]>
-	</Script>
-</DisplayInfo>
+      <DisplayForm>
+      <Script>
+      <![CDATA[
+         <UiScreen>
+         <IoScreen>
+         <IoObject>
+         <Title>Example 1</Title>
+         <Message>Hello 2nd screen</Message>
+         </IoObject>
+         </IoScreen>
+         </UiScreen>
+      ]]>
+      </Script>
+      </DisplayForm>
 </SerioCommands>
     """
     return Response(xml_data, mimetype='text/xml')
