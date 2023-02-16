@@ -44,13 +44,13 @@ def getXML():
          <IoObject>
          <Title>Select Fruit</Title>
         <Selection id="fruit" minSelectNum="1" multiple="false">
-        <Item selected=false" value="apple">
+        <Item selected="false" value="apple">
          <Label>Apple</Label>
          </Item>
-          <Item selected=false" value="peach">
+          <Item selected="false" value="peach">
          <Label>Peach</Label>
          </Item>
-          <Item selected=false" value="pear">
+          <Item selected="false" value="pear">
          <Label>Pear</Label>
          </Item>
          </IoObject>
