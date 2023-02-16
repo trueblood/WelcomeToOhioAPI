@@ -18,8 +18,8 @@ def getApplicantInfo(filename):
     info = helper.Helper.find_person_info_from_license(formattedValue)
     return info
 
-@app.route('/xml')
-def getXML():
+@app.route('/xml/<data>')
+def getXML(data):
     xml_data="""
 <SerioCommands version="v009">
    <DisplayForm>
