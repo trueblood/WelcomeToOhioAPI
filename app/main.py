@@ -26,9 +26,8 @@ def getApplicantInfo(filename):
     info = helper.Helper.find_person_info_from_license(formattedValue)
     return info
 
-@app.route('/xml/<data>', methods=['POST'])
-def getXML(data):
-    print(str(data), file=sys.stdout)
+@app.route('/xml', methods=['POST'])
+def getXML():
     xml_data="""
 <SerioCommands version="1.0">
       <DisplayForm>
@@ -38,7 +37,7 @@ def getXML(data):
          <IoScreen>
          <IoObject>
          <Title>Example 1</Title>
-         <Message>Example 2</Message>
+         <Message>Hello World!</Message>
          </IoObject>
          </IoScreen>
          </UiScreen>
