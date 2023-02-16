@@ -31,34 +31,63 @@ def getXML():
     xml_data="""
 
 
-<SerioCommands version="1.2">
-      <DisplayForm>
-      <Script>
-      <![CDATA[
-         <UiScreen>
-         <Title>'Single Select' (simple)</Title>
-         <Operations>
-            <Op type="Submit" action="/selected" />
-        </Operations>
-         <IoScreen>
-         <IoObject>
-         <Title>Select Fruit</Title>
-        <Selection id="fruit" minSelectNum="1" multiple="false">
-        <Item selected="false" value="apple">
-         <Label>Apple</Label>
-         </Item>
-          <Item selected="false" value="peach">
-         <Label>Peach</Label>
-         </Item>
-          <Item selected="false" value="pear">
-         <Label>Pear</Label>
-         </Item>
-         </IoObject>
-         </IoScreen>
-         </UiScreen>
-      ]]>
-      </Script>
-      </DisplayForm>
+<SerioCommands version="1 0">
+ <DisplayForm>
+  <Script>
+   <![CDATA[
+    <UiScreen>
+     <Title>Layer Select</Title>
+     <Operations>
+      <Op type="Submit" action="./3.xml" ></Op>
+      <Op type="Back" action="./1.xml" ></Op>
+     </Operations>
+
+     <IoScreen>
+      <IoObject>
+       <Title>Select Item</Title>
+       <Selection id="SelectItem" multiple="false">
+        <Item value="1" selected="true">
+          <Label>Item 1</Label>
+        </Item>
+        <Item value="2" selected="false">
+          <Label>Item 2</Label>
+        </Item>
+        <Item value="3" selected="false">
+          <Label>Item 3</Label>
+        </Item>
+       </Selection>
+      </IoObject>
+
+      <IoObject>
+       <Title>Text Input</Title>
+       <TextArea id="textArea" cpos="Tail" priorInput="LowerCase">
+        <InitValue>example text</InitValue>
+        <MinLength>1</MinLength>
+        <MaxLength>32</MaxLength>
+        <Mask>false</Mask>
+        <LetterTypes>
+          <LetterType>UpperCase</LetterType>
+          <LetterType>LowerCase</LetterType>
+          <LetterType>Numeric</LetterType>
+          <LetterType>Glyph</LetterType>
+        </LetterTypes>
+       </TextArea>
+      </IoObject>
+
+      <IoObject>
+       <Title>Num Input</Title>
+       <NumericalArea id="numericalArea" cpos="Tail">
+        <InitValue>123</InitValue>
+        <MinValue>1</MinValue>
+        <MaxValue>65535</MaxValue>
+       </NumericalArea>
+      </IoObject>
+
+     </IoScreen>
+    </UiScreen>
+   ]]>
+  </Script>
+ </DisplayForm>
 </SerioCommands>
     """
     return Response(xml_data, mimetype='text/xml')
