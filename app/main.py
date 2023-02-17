@@ -22,10 +22,10 @@ def hello_world():
 @app.route('/getapplicantinfo', methods=['GET'])
 def getApplicantInfo():
     filename = sftp.sftphelper.get_most_recent_file_name()
-    #value = sftp.sftphelper.get_file_from_sftp(filename)
-    #formattedValue = value.replace('\n', ' ')
+    value = sftp.sftphelper.get_file_from_sftp(filename)
+    formattedValue = value.replace('\n', ' ')
     #info = helper.Helper.find_person_info_from_license(formattedValue)
-    return filename
+    return formattedValue
 
 @app.route('/xml', methods=['POST'])
 def getXML():
