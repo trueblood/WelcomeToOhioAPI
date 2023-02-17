@@ -19,8 +19,8 @@ app.logger.addHandler(handler)
 def hello_world():
     return "status up"
 
-@app.route('/getapplicantinfo/<filename>', methods=['GET'])
-def getApplicantInfo(filename):
+@app.route('/getapplicantinfo', methods=['GET'])
+def getApplicantInfo():
     filename = sftp.sftphelper.get_most_recent_file_name()
     value = sftp.sftphelper.get_file_from_sftp(filename)
     formattedValue = value.replace('\n', ' ')
