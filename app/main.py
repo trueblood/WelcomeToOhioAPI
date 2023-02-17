@@ -31,58 +31,30 @@ def getXML():
     xml_data="""
 
 
-<SerioCommands version="1 0">
+<SerioCommands version="1.0">
  <DisplayForm>
   <Script>
-   <![CDATA[
+   <![CDATA[<?xml version="1.0" encoding="UTF-8"?>
     <UiScreen>
-     <Title>Layer Select</Title>
-     <Operations>
-      <Op type="Submit" action="./3.xml" ></Op>
-      <Op type="Back" action="./1.xml" ></Op>
-     </Operations>
-
+      <Operations>
+      <Op type="Submit" action="./2.xml" ></Op>
+      <Op type="Back" action="./0.xml" ></Op>
+    </Operations>
      <IoScreen>
       <IoObject>
-       <Title>Select Item</Title>
-       <Selection id="SelectItem" multiple="false">
-        <Item value="1" selected="true">
-          <Label>Item 1</Label>
+       <Title>Select item(Single)</Title>
+       <Selection id="selectid test" multiple="false" >
+        <Item selected="false" value="FirstItem">
+         <Label>First Item</Label>
         </Item>
-        <Item value="2" selected="false">
-          <Label>Item 2</Label>
+        <Item selected="false" value="SecondItem">
+         <Label>Second Item</Label>
         </Item>
-        <Item value="3" selected="false">
-          <Label>Item 3</Label>
+        <Item selected="false" value="ThirdItem">
+         <Label>Third Item</Label>
         </Item>
        </Selection>
       </IoObject>
-
-      <IoObject>
-       <Title>Text Input</Title>
-       <TextArea id="textArea" cpos="Tail" priorInput="LowerCase">
-        <InitValue>example text</InitValue>
-        <MinLength>1</MinLength>
-        <MaxLength>32</MaxLength>
-        <Mask>false</Mask>
-        <LetterTypes>
-          <LetterType>UpperCase</LetterType>
-          <LetterType>LowerCase</LetterType>
-          <LetterType>Numeric</LetterType>
-          <LetterType>Glyph</LetterType>
-        </LetterTypes>
-       </TextArea>
-      </IoObject>
-
-      <IoObject>
-       <Title>Num Input</Title>
-       <NumericalArea id="numericalArea" cpos="Tail">
-        <InitValue>123</InitValue>
-        <MinValue>1</MinValue>
-        <MaxValue>65535</MaxValue>
-       </NumericalArea>
-      </IoObject>
-
      </IoScreen>
     </UiScreen>
    ]]>
