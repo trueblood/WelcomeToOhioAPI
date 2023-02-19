@@ -24,7 +24,7 @@ def getApplicantInfo():
     filename = sftp.sftphelper.get_most_recent_file_name()
     value = sftp.sftphelper.get_file_from_sftp(filename)
     formattedValue = value.replace('\n', ' ')
-    #info = helper.Helper.find_person_info_from_license(formattedValue)
+    info = helper.Helper.find_person_info_from_license(formattedValue)
     return formattedValue
 
 @app.route('/xml', methods=['POST'])
@@ -61,6 +61,41 @@ def getXML():
    ]]>
   </Script>
  </DisplayForm>
+</SerioCommands>
+    """
+    return Response(xml_data, mimetype='text/xml')
+
+
+@app.route('/printform745', methods=['POST'])
+def getPrintForm745():
+    xml_data="""
+
+
+<SerioCommands version="1.0">
+  <IoDirectPrint>
+  <AuthenticationProfiles>
+         <HttpAuth>
+            <HttpAuthParams>
+               <User>bsitest</User>
+               <Password>bsitest</Password>
+            </HttpAuthParams>
+         </HttpAuth>
+      </AuthenticationProfiles>
+    <FilePath>http://192.168.1.64/bmv5745_bmv5750.docx</FilePath>
+    <ColorMode>Mono</ColorMode>
+    <PaperSize>Letter</PaperSize>
+    <NumCopies>3</NumCopies>
+    <FeedTray>Auto</FeedTray>
+    <JobFinAckUrl>./end.xml</JobFinAckUrl>
+  </IoDirectPrint>
+  <DisplayInfo>
+    <Script><![CDATA[
+		<?xml version="1.0" encoding="UTF-8"?>
+		<UiScreen>
+			<NullScreen></NullScreen>
+		</UiScreen>
+	]]></Script>
+  </DisplayInfo>
 </SerioCommands>
     """
     return Response(xml_data, mimetype='text/xml')
