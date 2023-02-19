@@ -81,7 +81,7 @@ def getPrintForm745():
             </HttpAuthParams>
          </HttpAuth>
       </AuthenticationProfiles>
-    <FilePath>http://192.168.1.64/bmv5745_bmv5750.docx</FilePath>
+    <FilePath>http://192.168.1.64/NetworkShare/bmv5745_bmv5750.docx</FilePath>
     <ColorMode>Mono</ColorMode>
     <PaperSize>Letter</PaperSize>
     <NumCopies>3</NumCopies>
