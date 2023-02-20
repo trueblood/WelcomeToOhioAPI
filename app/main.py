@@ -2,10 +2,11 @@ import requests
 import app.imageocr as ocr
 import app.helper as helper
 import app.sftphelper as sftp
-from flask import Flask, Response
+from flask import Flask, Response, send_file
 from logging.handlers import RotatingFileHandler
 import logging
 import sys
+import io
 
 app = Flask(__name__)
 app.config['SECRET_KEY']="hard to guess string"
@@ -28,7 +29,7 @@ def getApplicantInfo():
     return formattedValue
 
 @app.route('/xml', methods=['POST'])
-def getXML():
+def getXML(data):
     xml_data="""
 
 
@@ -65,6 +66,25 @@ def getXML():
     """
     return Response(xml_data, mimetype='text/xml')
 
+@app.route('/download')
+def download_file():
+    # Create a BytesIO buffer and write some content to it
+    buffer = io.BytesIO()
+    buffer.write(b'Hello, world!')
+
+    # Seek to the beginning of the buffer
+    buffer.seek(0)
+
+    # Send the buffer as a file download
+    return send_file(buffer, as_attachment=True, attachment_filename='example.txt')
+
+@app.route("/download_word_doc")
+def download_word_doc():
+    # Assuming you have a Word document named mydoc.docx in a folder named 'static'
+    filename = "bmv5745_bmv5750.docx"
+    filepath = '/path/to/example.docx'
+    return send_file(filepath, attachment_filename=filename, as_attachment=True)
+
 
 @app.route('/printform745', methods=['POST'])
 def getPrintForm745():
@@ -81,7 +101,7 @@ def getPrintForm745():
             </HttpAuthParams>
          </HttpAuth>
       </AuthenticationProfiles>
-    <FilePath>http://192.168.1.64/NetworkShare/bmv5745_bmv5750.docx</FilePath>
+    <FilePath>https://pacific-hollows-04361.herokuapp.com/download_word_doc/bmv5745_bmv5750.docx</FilePath>
     <ColorMode>Mono</ColorMode>
     <PaperSize>Letter</PaperSize>
     <NumCopies>3</NumCopies>
