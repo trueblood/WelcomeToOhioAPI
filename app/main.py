@@ -47,7 +47,7 @@ def getStart():
          <![CDATA[
          <UiScreen>
                <Operations>
-                  <Op type="Submit" action="xml">
+                  <Op type="Submit" action="zeroxml">
                   </Op>
                   <Op type="Back" action="./7.xml">
                   </Op>
