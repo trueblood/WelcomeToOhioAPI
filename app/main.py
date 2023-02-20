@@ -40,7 +40,6 @@ def getStart():
 
     xml_data="""
 
-<?xml version="1.0" encoding="utf-8"?>
 <SerioCommands version="1.0">
    <DisplayForm>
       <Script>
