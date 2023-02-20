@@ -33,6 +33,40 @@ def getApplicantInfo():
     info = helper.Helper.find_person_info_from_license(formattedValue)
     return formattedValue
 
+@app.route('/start', methods=['POST'])
+def getStart():
+    data = request.form # This will capture the data sent in the request body
+    app.logger.info(data)
+
+    xml_data="""
+
+<?xml version="1.0" encoding="utf-8"?>
+<SerioCommands version="1.0">
+   <DisplayForm>
+      <Script>
+         <![CDATA[
+         <UiScreen>
+               <Operations>
+                  <Op type="Submit" action="xml">
+                  </Op>
+                  <Op type="Back" action="./7.xml">
+                  </Op>
+               </Operations>
+               <IoScreen>
+                  <IoObject>
+                     <Title>Message Title</Title>
+                     <Message>Please press "OK" button</Message>
+                  </IoObject>
+               </IoScreen>
+            </UiScreen>
+         ]]>
+      </Script>
+   </DisplayForm>
+</SerioCommands>
+    """
+    return Response(xml_data, mimetype='text/xml')
+
+
 @app.route('/xml', methods=['POST'])
 def getXML():
     data = request.form # This will capture the data sent in the request body
