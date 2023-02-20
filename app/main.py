@@ -2,15 +2,20 @@ import requests
 import app.imageocr as ocr
 import app.helper as helper
 import app.sftphelper as sftp
-from flask import Flask, Response, send_file
+from flask import Flask, Response, send_file, request
 from logging.handlers import RotatingFileHandler
 import logging
 import sys
 import io
+import os
 
 app = Flask(__name__)
 app.config['SECRET_KEY']="hard to guess string"
 
+# Set up logging to Heroku
+if 'DYNO' in os.environ:
+    app.logger.addHandler(logging.StreamHandler(sys.stdout))
+    app.logger.setLevel(logging.INFO)
 
 handler = RotatingFileHandler('app.log', maxBytes=10000, backupCount=1)
 handler.setLevel(logging.INFO)
@@ -30,6 +35,9 @@ def getApplicantInfo():
 
 @app.route('/xml', methods=['POST'])
 def getXML():
+    data = request.form # This will capture the data sent in the request body
+    app.logger.info('Hello world!')
+
     xml_data="""
 
 
