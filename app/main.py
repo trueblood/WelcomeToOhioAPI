@@ -29,7 +29,7 @@ def getApplicantInfo():
     return formattedValue
 
 @app.route('/xml', methods=['POST'])
-def getXML(data):
+def getXML():
     xml_data="""
 
 
