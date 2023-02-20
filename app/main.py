@@ -33,7 +33,7 @@ def getApplicantInfo():
     info = helper.Helper.find_person_info_from_license(formattedValue)
     return formattedValue
 
-@app.route('/start', methods=['GET'])
+@app.route('/start', methods=['POST'])
 def getStart():
     data = request.form # This will capture the data sent in the request body
     app.logger.info(data)
@@ -107,7 +107,7 @@ def getXML():
     """
     return Response(xml_data, mimetype='text/xml')
 
-@app.route('/zeroxml', methods=['POST'])
+@app.route('/zeroxml', methods=['GET'])
 def getZeroXml():
     data = request.form # This will capture the data sent in the request body
     app.logger.info(data)
