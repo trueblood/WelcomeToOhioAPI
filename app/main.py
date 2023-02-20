@@ -36,7 +36,7 @@ def getApplicantInfo():
 @app.route('/xml', methods=['POST'])
 def getXML():
     data = request.form # This will capture the data sent in the request body
-    app.logger.info('Hello world!')
+    app.logger.info(data)
 
     xml_data="""
 
