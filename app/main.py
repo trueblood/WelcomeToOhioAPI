@@ -80,7 +80,7 @@ def getXML():
    <![CDATA[<?xml version="1.0" encoding="UTF-8"?>
     <UiScreen>
       <Operations>
-      <Op type="Submit" action="zeroxml" ></Op>
+      <Op type="Submit" action="start" ></Op>
       <Op type="Back" action="./0.xml" ></Op>
     </Operations>
      <IoScreen>
