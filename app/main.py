@@ -74,7 +74,7 @@ def getXML():
     """
     return Response(xml_data, mimetype='text/xml')
 
-@app.route('/download' methods=['POST'])
+@app.route('/download', methods=['POST'])
 def download_file():
     # Create a BytesIO buffer and write some content to it
     buffer = io.BytesIO()
@@ -86,7 +86,7 @@ def download_file():
     # Send the buffer as a file download
     return send_file(buffer, as_attachment=True, attachment_filename='example.txt')
 
-@app.route("/download_word_doc" methods=['POST'])
+@app.route("/download_word_doc", methods=['POST'])
 def download_word_doc(): 
     # Assuming you have a Word document named mydoc.docx in a folder named 'static'
     filename = "bmv5745_bmv5750.docx"
