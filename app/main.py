@@ -52,8 +52,8 @@ def getStart():
           </Operations>
           <IoScreen>
             <IoObject>
-              <Title>Message Title</Title>
-              <Message imgsrc="./Sample_A.jpg">Please press "OK" button</Message>
+              <Title>Welcome To Ohio</Title>
+              <Message imgsrc="./Sample_A.jpg">Welcome To Ohio new Resident. Please press "OK" button to continue.</Message>
             </IoObject>
           </IoScreen>
         </UiScreen>
