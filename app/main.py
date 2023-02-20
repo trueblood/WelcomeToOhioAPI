@@ -41,27 +41,27 @@ def getStart():
     xml_data="""
 
 <SerioCommands version="1.0">
-   <DisplayForm>
-      <Script>
-         <![CDATA[
-         <UiScreen>
-               <Operations>
-                  <Op type="Submit" action="zeroxml">
-                  </Op>
-                  <Op type="Back" action="./7.xml">
-                  </Op>
-               </Operations>
-               <IoScreen>
-                  <IoObject>
-                     <Title>Message Title</Title>
-                     <Message>Please press "OK" button</Message>
-                  </IoObject>
-               </IoScreen>
-            </UiScreen>
-         ]]>
-      </Script>
-   </DisplayForm>
-</SerioCommands>
+  <DisplayForm>
+    <Script>
+      <![CDATA[
+        <UiScreen>
+          <Title>title</Title>
+          <Operations>
+            <Op type="Submit" action="zeroxml"></Op>
+            <Op type="Back" action="./back.xml"></Op>
+          </Operations>
+          <IoScreen>
+            <IoObject>
+              <Title>Message Title</Title>
+              <Message imgsrc="./Sample_A.jpg">Please press "OK" button</Message>
+            </IoObject>
+          </IoScreen>
+        </UiScreen>
+      ]]>
+    </Script>
+  </DisplayForm>
+  </SerioCommands>
+
     """
     return Response(xml_data, mimetype='text/xml')
 
