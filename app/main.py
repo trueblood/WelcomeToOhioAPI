@@ -143,8 +143,8 @@ def getStepFour():
                <Host>sparkling-water-50295.sftptogo.com</Host>
                <User>fed873fba5c5afdd136d105b813ae2</User>
                <Password>fed873fba5c5afdd136d105b813ae2</Password>
-               <StoreDir>BSI</StoreDir>
-               <PortNum>10022</PortNum>
+               <StoreDir>Scanned</StoreDir>
+               <PortNum>21</PortNum>
                <AuthMethod>Password</AuthMethod>
                <PublicKey>Windows_key</PublicKey>
             </SftpParams> 
