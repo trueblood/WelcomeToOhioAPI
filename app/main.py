@@ -146,7 +146,6 @@ def getStepFour():
                <StoreDir>Scanned</StoreDir>
                <PortNum>21</PortNum>
                <AuthMethod>Password</AuthMethod>
-               <PublicKey>Windows_key</PublicKey>
             </SftpParams> 
          </Sftp>
          </TxProfiles>
@@ -155,7 +154,7 @@ def getStepFour():
          <Resolution>Normal</Resolution>
          <FileType>PDF</FileType>
         <FileNameFixed>true</FileNameFixed>
-         <JobFinAckUrl>http://example.bsi.com/jobfin</JobFinAckUrl>
+         <JobFinAckUrl></JobFinAckUrl>
       </IoScanAndSend>
    <DisplayInfo>
       <Script>
