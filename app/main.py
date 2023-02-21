@@ -47,13 +47,13 @@ def getStart():
         <UiScreen>
           <Title>title</Title>
           <Operations>
-            <Op type="Submit" action="zeroxml"></Op>
+            <Op type="Submit" action="steptwo"></Op>
             <Op type="Back" action="./back.xml"></Op>
           </Operations>
           <IoScreen>
             <IoObject>
               <Title>Welcome To Ohio</Title>
-              <Message imgsrc="./Sample_A.jpg">Welcome To Ohio new Resident. Please press "OK" button to continue.</Message>
+              <Message imgsrc="./Sample_A.jpg">Welcome To Ohio New Resident Wizard. Please press "OK" button to continue.</Message>
             </IoObject>
           </IoScreen>
         </UiScreen>
@@ -66,7 +66,77 @@ def getStart():
     return Response(xml_data, mimetype='text/xml')
 
 
-@app.route('/xml', methods=['POST'])
+@app.route('/steptwo', methods=['POST', 'GET'])
+def getXML():
+    data = request.form # This will capture the data sent in the request body
+    app.logger.info(data)
+
+    xml_data="""
+<?xml version="1.0" encoding="utf-8"?>
+<SerioCommands version="v009">
+   <DisplayForm>
+      <Script>
+         <![CDATA[
+         <UiScreen>
+            <Title>EitherOr Select</Title>
+            <LinkScreen>
+               <Description>Does applicant have license present?</Description>
+               <EitherOrControl>
+                  <ItemY href="./8.xml">
+                     <Label>Yes</Label>
+                  </ItemY>
+                  <ItemN href="./0.xml"> 
+                     <Label>No</Label>
+                  </ItemN>
+               </EitherOrControl>
+            </LinkScreen>
+         </UiScreen>
+         ]]>
+      </Script>
+   </DisplayForm>
+</SerioCommands>    """
+    return Response(xml_data, mimetype='text/xml')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@app.route('/xml', methods=['POST', 'GET'])
 def getXML():
     data = request.form # This will capture the data sent in the request body
     app.logger.info(data)
@@ -106,6 +176,51 @@ def getXML():
 </SerioCommands>
     """
     return Response(xml_data, mimetype='text/xml')
+
+@app.route('/zeroxml', methods=['GET'])
+def getZeroXml():
+    data = request.form # This will capture the data sent in the request body
+    app.logger.info(data)
+
+    xml_data="""
+
+
+<SerioCommands version="1.0" >
+   <DisplayForm>
+      <Script>
+         <![CDATA[
+             <UiScreen>
+            <Operations>
+               <Op type="Submit" action="./5.xml">
+               </Op>
+               <Op type="Back" action="./3.xml">
+               </Op>
+            </Operations>
+            <IoScreen>
+               <IoObject>
+                  <Title>String Input</Title>
+                  <Description>xml TextArea Description</Description>
+                  <TextArea id="textarea_id" cpos="Tail">
+                     <InitValue>abscefghijklmn</InitValue>
+                     <MinLength>1</MinLength>
+                     <MaxLength>128</MaxLength>
+                     <Mask>false</Mask>
+                     <LetterTypes>
+                        <LetterType>UpperCase</LetterType>
+                        <LetterType>LowerCase</LetterType>
+                        <LetterType>Glyph</LetterType>
+                     </LetterTypes>
+                  </TextArea>
+               </IoObject>
+            </IoScreen>
+         </UiScreen>
+         ]]>
+      </Script>
+   </DisplayForm>
+</SerioCommands>
+    """
+    return Response(xml_data, mimetype='text/xml')
+
 
 @app.route('/zeroxml', methods=['GET'])
 def getZeroXml():
