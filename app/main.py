@@ -79,7 +79,7 @@ def getStepTwo():
             <LinkScreen>
                <Description>Does applicant have license present?"</Description>
                <EitherOrControl>
-                  <ItemY href="start">
+                  <ItemY href="stepthree">
                      <Label>Yes</Label>
                   </ItemY>
                   <ItemN href="./0.xml"> 
@@ -103,26 +103,25 @@ def getStepThree():
 
     xml_data="""
 <SerioCommands version="1.0">
-   <DisplayForm>
-      <Script>
-         <![CDATA[
-         <UiScreen>
-               <Operations>
-                  <Op type="Submit" action="./6.xml">
-                  </Op>
-                  <Op type="Back" action="./7.xml">
-                  </Op>
-               </Operations>
-               <IoScreen>
-                  <IoObject>
-                     <Title>Message Title</Title>
-                     <Message>Please press "OK" button</Message>
-                  </IoObject>
-               </IoScreen>
-            </UiScreen>
-         ]]>
-      </Script>
-   </DisplayForm>
+  <DisplayForm>
+    <Script>
+      <![CDATA[
+        <UiScreen>
+          <Title>title</Title>
+          <Operations>
+            <Op type="Submit" action="./ok.xml"></Op>
+            <Op type="Back" action="./back.xml"></Op>
+          </Operations>
+          <IoScreen>
+            <IoObject>
+              <Title>Message Title</Title>
+              <Message imgsrc="./Sample_A.jpg">Please press "OK" button</Message>
+            </IoObject>
+          </IoScreen>
+        </UiScreen>
+      ]]>
+    </Script>
+  </DisplayForm>
 </SerioCommands>
 
     """
