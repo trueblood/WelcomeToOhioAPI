@@ -137,24 +137,18 @@ def getStepFour():
 <SerioCommands version="1.0">
       <IoScanAndSend>
          <TxProfiles>
-            <Ftp>
-               <FtpParams>
-                  <FileName>testfiles</FileName>
-                  <Host>sparkling-water-50295.sftptogo.com</Host>
-                  <User>fed873fba5c5afdd136d105b813ae2</User>
-                  <Password>rtvxr0u8n7m0o7qnimuleyr1agla41c061jtx7c4</Password>
-                  <StoreDir>Scanned/</StoreDir>
-                  <PassiveMode>true</PassiveMode>
-                  <PortNum>21</PortNum>
-               </FtpParams>
-            </Ftp>
+			<Media>
+				<MediaParams>
+					<FileName>scan2usb</FileName>
+				</MediaParams>
+			</Media>
          </TxProfiles>
          <ScanTray>ADF</ScanTray>
          <ColorMode>Color</ColorMode>
          <Resolution>Normal</Resolution>
          <FileType>PDF</FileType>
          <FileNameFixed>true</FileNameFixed>
-          <JobFinAckUrl>http://example.bsi.com/jobfin</JobFinAckUrl>
+         <JobFinAckUrl>http://example.bsi.com/jobfin</JobFinAckUrl>
       </IoScanAndSend>
    <DisplayInfo>
       <Script>
