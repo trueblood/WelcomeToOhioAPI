@@ -114,8 +114,8 @@ def getStepThree():
           </Operations>
           <IoScreen>
             <IoObject>
-              <Title>Message Title</Title>
-              <Message imgsrc="./Sample_A.jpg">Please press "OK" button</Message>
+              <Title>Information</Title>
+              <Message imgsrc="./Sample_A.jpg">We are now going to scan the license. Please insert into scanner and click the "OK" button.</Message>
             </IoObject>
           </IoScreen>
         </UiScreen>
