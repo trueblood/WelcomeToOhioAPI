@@ -70,27 +70,28 @@ def getStepTwo():
     app.logger.info(data)
 
     xml_data="""
-<SerioCommands version="1.0">
-  <DisplayForm>
-    <Script>
-      <![CDATA[
-        <UiScreen>
-          <Title>title</Title>
-          <Operations>
-            <Op type="Submit" action="steptwo"></Op>
-            <Op type="Back" action="./back.xml"></Op>
-          </Operations>
-          <IoScreen>
-            <IoObject>
-              <Title>Welcome To Ohio</Title>
-              <Message imgsrc="./Sample_A.jpg">Welcome To Ohio New Resident Wizard. Please press "OK" button to continue.</Message>
-            </IoObject>
-          </IoScreen>
-        </UiScreen>
-      ]]>
-    </Script>
-  </DisplayForm>
-  </SerioCommands>
+<SerioCommands version="v009">
+   <DisplayForm>
+      <Script>
+         <![CDATA[
+         <UiScreen>
+            <Title>EitherOr Select</Title>
+            <LinkScreen>
+               <Description>Please select "Yes" or "No"</Description>
+               <EitherOrControl>
+                  <ItemY href="start">
+                     <Label>Yes</Label>
+                  </ItemY>
+                  <ItemN href="./0.xml"> 
+                     <Label>No</Label>
+                  </ItemN>
+               </EitherOrControl>
+            </LinkScreen>
+         </UiScreen>
+         ]]>
+      </Script>
+   </DisplayForm>
+</SerioCommands>
 
     """
     return Response(xml_data, mimetype='text/xml')
