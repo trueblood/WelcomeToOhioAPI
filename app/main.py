@@ -67,7 +67,7 @@ def getStart():
 
 
 @app.route('/steptwo', methods=['POST', 'GET'])
-def getXML():
+def getStepTwo():
     data = request.form # This will capture the data sent in the request body
     app.logger.info(data)
 
