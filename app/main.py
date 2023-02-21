@@ -64,7 +64,36 @@ def getStart():
     """
     return Response(xml_data, mimetype='text/xml')
 
+@app.route('/steptwo', methods=['POST'])
+def getStepTwo():
+    data = request.form # This will capture the data sent in the request body
+    app.logger.info(data)
 
+    xml_data="""
+<SerioCommands version="1.0">
+  <DisplayForm>
+    <Script>
+      <![CDATA[
+        <UiScreen>
+          <Title>title</Title>
+          <Operations>
+            <Op type="Submit" action="steptwo"></Op>
+            <Op type="Back" action="./back.xml"></Op>
+          </Operations>
+          <IoScreen>
+            <IoObject>
+              <Title>Welcome To Ohio</Title>
+              <Message imgsrc="./Sample_A.jpg">Welcome To Ohio New Resident Wizard. Please press "OK" button to continue.</Message>
+            </IoObject>
+          </IoScreen>
+        </UiScreen>
+      ]]>
+    </Script>
+  </DisplayForm>
+  </SerioCommands>
+
+    """
+    return Response(xml_data, mimetype='text/xml')
 
 
 
