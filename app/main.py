@@ -77,7 +77,7 @@ def getStepTwo():
          <UiScreen>
             <Title>EitherOr Select</Title>
             <LinkScreen>
-               <Description>Please select "Yes" or "No"</Description>
+               <Description>Does applicant have license present?"</Description>
                <EitherOrControl>
                   <ItemY href="start">
                      <Label>Yes</Label>
@@ -96,7 +96,37 @@ def getStepTwo():
     """
     return Response(xml_data, mimetype='text/xml')
 
+@app.route('/stepthree', methods=['GET', 'POST'])
+def getStepThree():
+    data = request.form # This will capture the data sent in the request body
+    app.logger.info(data)
 
+    xml_data="""
+<SerioCommands version="1.0">
+   <DisplayForm>
+      <Script>
+         <![CDATA[
+         <UiScreen>
+               <Operations>
+                  <Op type="Submit" action="./6.xml">
+                  </Op>
+                  <Op type="Back" action="./7.xml">
+                  </Op>
+               </Operations>
+               <IoScreen>
+                  <IoObject>
+                     <Title>Information/Title>
+                     <Message>Place license in scanner then press the "OK" button.</Message>
+                  </IoObject>
+               </IoScreen>
+            </UiScreen>
+         ]]>
+      </Script>
+   </DisplayForm>
+</SerioCommands>
+
+    """
+    return Response(xml_data, mimetype='text/xml')
 
 
 
