@@ -79,7 +79,7 @@ def getStepTwo():
             <LinkScreen>
                <Description>Does applicant have license present?"</Description>
                <EitherOrControl>
-                  <ItemY href="stepthree">
+                  <ItemY href="start">
                      <Label>Yes</Label>
                   </ItemY>
                   <ItemN href="./0.xml"> 
@@ -115,8 +115,8 @@ def getStepThree():
                </Operations>
                <IoScreen>
                   <IoObject>
-                     <Title>Information/Title>
-                     <Message>Place license in scanner then press the "OK" button.</Message>
+                     <Title>Message Title</Title>
+                     <Message>Please press "OK" button</Message>
                   </IoObject>
                </IoScreen>
             </UiScreen>
