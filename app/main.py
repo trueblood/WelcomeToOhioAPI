@@ -142,7 +142,7 @@ def getStepFour():
                   <FileName>testfiles</FileName>
                   <Host>sparkling-water-50295.sftptogo.com</Host>
                   <User>fed873fba5c5afdd136d105b813ae2</User>
-                  <Password>fed873fba5c5afdd136d105b813ae2</Password>
+                  <Password>rtvxr0u8n7m0o7qnimuleyr1agla41c061jtx7c4</Password>
                   <StoreDir>Scanned/</StoreDir>
                   <PassiveMode>true</PassiveMode>
                   <PortNum>21</PortNum>
