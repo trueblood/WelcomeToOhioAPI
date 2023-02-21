@@ -109,7 +109,7 @@ def getStepThree():
         <UiScreen>
           <Title>title</Title>
           <Operations>
-            <Op type="Submit" action="./ok.xml"></Op>
+            <Op type="Submit" action="stepfour"></Op>
             <Op type="Back" action="./back.xml"></Op>
           </Operations>
           <IoScreen>
@@ -127,6 +127,48 @@ def getStepThree():
     """
     return Response(xml_data, mimetype='text/xml')
 
+@app.route('/stepfour', methods=['GET', 'POST'])
+def getStepFour():
+    data = request.form # This will capture the data sent in the request body
+    app.logger.info(data)
+
+    xml_data="""
+<SerioCommands version="1.0">
+      <IoScanAndSend>
+         <TxProfiles>
+         <Sftp>
+
+            <SftpParams>
+               <FileName>SFTP_PWBSI</FileName>
+               <Host>sparkling-water-50295.sftptogo.com</Host>
+               <User>fed873fba5c5afdd136d105b813ae2</User>
+               <Password>fed873fba5c5afdd136d105b813ae2</Password>
+               <StoreDir>BSI</StoreDir>
+               <PortNum>10022</PortNum>
+               <AuthMethod>Password</AuthMethod>
+               <PublicKey>Windows_key</PublicKey>
+            </SftpParams> 
+         </Sftp>
+         </TxProfiles>
+         <ScanTray>ADF</ScanTray>
+         <ColorMode>Color</ColorMode>
+         <Resolution>Normal</Resolution>
+         <FileType>PDF</FileType>
+        <FileNameFixed>true</FileNameFixed>
+         <JobFinAckUrl>http://example.bsi.com/jobfin</JobFinAckUrl>
+      </IoScanAndSend>
+   <DisplayInfo>
+      <Script>
+         <![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+         <UiScreen >
+                    <NullScreen></NullScreen>
+         </UiScreen>
+         ]]>
+      </Script> 
+   </DisplayInfo>
+</SerioCommands>
+    """
+    return Response(xml_data, mimetype='text/xml')
 
 
 
