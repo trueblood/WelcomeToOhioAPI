@@ -66,42 +66,6 @@ def getStart():
     return Response(xml_data, mimetype='text/xml')
 
 
-@app.route('/steptwo', methods=['POST', 'GET'])
-def getStepTwo():
-    data = request.form # This will capture the data sent in the request body
-    app.logger.info(data)
-
-    xml_data="""
-<?xml version="1.0" encoding="utf-8"?>
-<SerioCommands version="v009">
-   <DisplayForm>
-      <Script>
-         <![CDATA[
-         <UiScreen>
-            <Title>EitherOr Select</Title>
-            <LinkScreen>
-               <Description>Does applicant have license present?</Description>
-               <EitherOrControl>
-                  <ItemY href="./8.xml">
-                     <Label>Yes</Label>
-                  </ItemY>
-                  <ItemN href="./0.xml"> 
-                     <Label>No</Label>
-                  </ItemN>
-               </EitherOrControl>
-            </LinkScreen>
-         </UiScreen>
-         ]]>
-      </Script>
-   </DisplayForm>
-</SerioCommands>    """
-    return Response(xml_data, mimetype='text/xml')
-
-
-
-
-
-
 
 
 
