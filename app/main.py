@@ -79,7 +79,7 @@ def getStepTwo():
             <LinkScreen>
                <Description>Does applicant have license present?"</Description>
                <EitherOrControl>
-                  <ItemY href="start">
+                  <ItemY href="stepthree">
                      <Label>Yes</Label>
                   </ItemY>
                   <ItemN href="./0.xml"> 
