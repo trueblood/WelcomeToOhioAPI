@@ -133,28 +133,28 @@ def getStepFour():
     app.logger.info(data)
 
     xml_data="""
+
 <SerioCommands version="1.0">
       <IoScanAndSend>
          <TxProfiles>
-         <Sftp>
-
-            <SftpParams>
-               <FileName>SFTP_PWBSI</FileName>
-               <Host>sparkling-water-50295.sftptogo.com</Host>
-               <User>fed873fba5c5afdd136d105b813ae2</User>
-               <Password>fed873fba5c5afdd136d105b813ae2</Password>
-               <StoreDir>Scanned</StoreDir>
-               <PortNum>21</PortNum>
-               <AuthMethod>Password</AuthMethod>
-            </SftpParams> 
-         </Sftp>
+            <Ftp>
+               <FtpParams>
+                  <FileName>testfiles</FileName>
+                  <Host>sparkling-water-50295.sftptogo.com</Host>
+                  <User>fed873fba5c5afdd136d105b813ae2</User>
+                  <Password>fed873fba5c5afdd136d105b813ae2</Password>
+                  <StoreDir>Scanned/</StoreDir>
+                  <PassiveMode>true</PassiveMode>
+                  <PortNum>21</PortNum>
+               </FtpParams>
+            </Ftp>
          </TxProfiles>
          <ScanTray>ADF</ScanTray>
          <ColorMode>Color</ColorMode>
          <Resolution>Normal</Resolution>
          <FileType>PDF</FileType>
-        <FileNameFixed>true</FileNameFixed>
-         <JobFinAckUrl></JobFinAckUrl>
+         <FileNameFixed>true</FileNameFixed>
+          <JobFinAckUrl>http://example.bsi.com/jobfin</JobFinAckUrl>
       </IoScanAndSend>
    <DisplayInfo>
       <Script>
