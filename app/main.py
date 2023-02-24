@@ -206,7 +206,7 @@ def getStepHasVehicleStepTwo():
         <UiScreen>
           <Title>title</Title>
           <Operations>
-            <Op type="Submit" action="./ok.xml"></Op>
+            <Op type="Submit" action="stephasvehiclestepthree"></Op>
             <Op type="Back" action="./back.xml"></Op>
           </Operations>
           <IoScreen>
