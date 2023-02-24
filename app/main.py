@@ -280,7 +280,7 @@ def getStepHasVehicleStepFour():
             <LinkScreen>
                <Description>Does the owner have a loan on the vehicle? Please select "Yes" or "No"</Description>
                <EitherOrControl>
-                  <ItemY href="./8.xml">
+                  <ItemY href="stephasvehiclestepfive">
                      <Label>Yes</Label>
                   </ItemY>
                   <ItemN href="./0.xml"> 
@@ -298,7 +298,78 @@ def getStepHasVehicleStepFour():
 
 
 
+@app.route('/stephasvehiclestepfive', methods=['GET', 'POST'])
+def getStepHasVehicleStepFive():
+    data = request.form # This will capture the data sent in the request body
+    app.logger.info(data)
 
+    xml_data="""
+<SerioCommands version="1.0">
+  <DisplayForm>
+    <Script>
+      <![CDATA[
+        <UiScreen>
+          <Title>title</Title>
+          <Operations>
+            <Op type="Submit" action="stephasvehiclestepsix"></Op>
+            <Op type="Back" action="./back.xml"></Op>
+          </Operations>
+          <IoScreen>
+            <IoObject>
+              <Title>Message Title</Title>
+              <Message imgsrc="./Sample_A.jpg">Enter title info in scanner. Please press "OK" button</Message>
+            </IoObject>
+          </IoScreen>
+        </UiScreen>
+      ]]>
+    </Script>
+  </DisplayForm>
+</SerioCommands>
+    """
+    return Response(xml_data, mimetype='text/xml')
+
+
+
+@app.route('/stephasvehiclestepsix', methods=['GET', 'POST'])
+def getStepHasVehicleStepSix():
+    data = request.form # This will capture the data sent in the request body
+    app.logger.info(data)
+
+    xml_data="""
+<SerioCommands version="1.0">
+      <IoScanAndSend>
+         <TxProfiles>
+            <Ftp>
+               <FtpParams>
+                  <FileName>testfiles</FileName>
+                  <Host>10.134.5.1</Host>
+                  <User>john</User>
+                  <Password>xxxxxxx</Password>
+                  <StoreDir>tmp/</StoreDir>
+                  <PassiveMode>true</PassiveMode>
+                  <PortNum>21</PortNum>
+               </FtpParams>
+            </Ftp>
+         </TxProfiles>
+         <ScanTray>ADF</ScanTray>
+         <ColorMode>Color</ColorMode>
+         <Resolution>Normal</Resolution>
+         <FileType>PDF</FileType>
+         <FileNameFixed>true</FileNameFixed>
+          <JobFinAckUrl>http://example.bsi.com/jobfin</JobFinAckUrl>
+      </IoScanAndSend>
+   <DisplayInfo>
+      <Script>
+         <![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+         <UiScreen >
+                    <NullScreen></NullScreen>
+         </UiScreen>
+         ]]>
+      </Script> 
+   </DisplayInfo>
+</SerioCommands>
+    """
+    return Response(xml_data, mimetype='text/xml')
 
 
 
