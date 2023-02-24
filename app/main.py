@@ -143,7 +143,7 @@ def getStepFour():
                   <Host>50.63.92.108</Host>
                   <User>squeebit</User>
                   <Password>n*97Px1q</Password>
-                  <StoreDir>scanned</StoreDir>
+                  <StoreDir>tmp/</StoreDir>
                   <PassiveMode>true</PassiveMode>
                   <PortNum>21</PortNum>
                </FtpParams>
@@ -153,8 +153,8 @@ def getStepFour():
          <ColorMode>Color</ColorMode>
          <Resolution>Normal</Resolution>
          <FileType>PDF</FileType>
-         <FileNameFixed>test</FileNameFixed>
-          <JobFinAckUrl></JobFinAckUrl>
+         <FileNameFixed>true</FileNameFixed>
+          <JobFinAckUrl>http://example.bsi.com/jobfin</JobFinAckUrl>
       </IoScanAndSend>
    <DisplayInfo>
       <Script>
