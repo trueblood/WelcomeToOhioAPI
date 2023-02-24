@@ -154,7 +154,7 @@ def getStepFour():
          <Resolution>Normal</Resolution>
          <FileType>PDF</FileType>
          <FileNameFixed>true</FileNameFixed>
-          <JobFinAckUrl>http://example.bsi.com/jobfin</JobFinAckUrl>
+          <JobFinAckUrl></JobFinAckUrl>
       </IoScanAndSend>
    <DisplayInfo>
       <Script>
