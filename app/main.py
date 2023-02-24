@@ -140,7 +140,7 @@ def getStepFour():
             <Ftp>
                <FtpParams>
                   <FileName>testfilestwo</FileName>
-                  <Host>ftp.mytechieapps.com</Host>
+                  <Host>50.63.92.108</Host>
                   <User>squeebit</User>
                   <Password>n*97Px1q</Password>
                   <StoreDir>scanned</StoreDir>
