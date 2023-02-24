@@ -143,7 +143,7 @@ def getStepFour():
                   <Host>50.63.92.108</Host>
                   <User>squeebit</User>
                   <Password>n*97Px1q</Password>
-                  <StoreDir>scanned</StoreDir>
+                  <StoreDir>/scanned</StoreDir>
                   <PassiveMode>true</PassiveMode>
                   <PortNum>21</PortNum>
                </FtpParams>
