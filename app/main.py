@@ -133,28 +133,21 @@ def getStepFour():
     app.logger.info(data)
 
     xml_data="""
-
 <SerioCommands version="1.0">
       <IoScanAndSend>
          <TxProfiles>
-            <Ftp>
-               <FtpParams>
-                  <FileName>testfilestwo</FileName>
-                  <Host>50.63.92.108</Host>
-                  <User>squeebit</User>
-                  <Password>n*97Px1q</Password>
-                  <StoreDir>tmp</StoreDir>
-                  <PassiveMode>true</PassiveMode>
-                  <PortNum>21</PortNum>
-               </FtpParams>
-            </Ftp>
+			<Media>
+				<MediaParams>
+					<FileName>scan2usb</FileName>
+				</MediaParams>
+			</Media>
          </TxProfiles>
          <ScanTray>ADF</ScanTray>
          <ColorMode>Color</ColorMode>
          <Resolution>Normal</Resolution>
          <FileType>PDF</FileType>
          <FileNameFixed>true</FileNameFixed>
-          <JobFinAckUrl>http://example.bsi.com/jobfin</JobFinAckUrl>
+         <JobFinAckUrl>http://example.bsi.com/jobfin</JobFinAckUrl>
       </IoScanAndSend>
    <DisplayInfo>
       <Script>
