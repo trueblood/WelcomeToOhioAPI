@@ -235,7 +235,7 @@ def getStepHasVehicleStepThree():
          <![CDATA[
              <UiScreen>
             <Operations>
-               <Op type="Submit" action="./5.xml">
+               <Op type="Submit" action="stephasvehiclestepfour">
                </Op>
                <Op type="Back" action="./3.xml">
                </Op>
@@ -265,6 +265,36 @@ def getStepHasVehicleStepThree():
     """
     return Response(xml_data, mimetype='text/xml')
 
+@app.route('/stephasvehiclestepfour', methods=['GET', 'POST'])
+def getStepHasVehicleStepFour():
+    data = request.form # This will capture the data sent in the request body
+    app.logger.info(data)
+
+    xml_data="""
+<SerioCommands version="v009">
+   <DisplayForm>
+      <Script>
+         <![CDATA[
+         <UiScreen>
+            <Title>EitherOr Select</Title>
+            <LinkScreen>
+               <Description>Does the owner have a loan on the vehicle? Please select "Yes" or "No"</Description>
+               <EitherOrControl>
+                  <ItemY href="./8.xml">
+                     <Label>Yes</Label>
+                  </ItemY>
+                  <ItemN href="./0.xml"> 
+                     <Label>No</Label>
+                  </ItemN>
+               </EitherOrControl>
+            </LinkScreen>
+         </UiScreen>
+         ]]>
+      </Script>
+   </DisplayForm>
+</SerioCommands>
+    """
+    return Response(xml_data, mimetype='text/xml')
 
 
 
