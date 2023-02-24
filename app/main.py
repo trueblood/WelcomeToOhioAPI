@@ -162,12 +162,108 @@ def getStepFour():
     """
     return Response(xml_data, mimetype='text/xml')
 
+@app.route('/stephasvehicle', methods=['GET', 'POST'])
+def getStepHasVehicle():
+    data = request.form # This will capture the data sent in the request body
+    app.logger.info(data)
+
+    xml_data="""
+<SerioCommands version="1.0">
+  <DisplayForm>
+    <Script>
+      <![CDATA[
+        <UiScreen>
+          <Title>title</Title>
+          <Operations>
+            <Op type="Submit" action="stephasvehiclesteptwo"></Op>
+            <Op type="Back" action="./back.xml"></Op>
+          </Operations>
+          <IoScreen>
+            <IoObject>
+              <Title>Message Title</Title>
+              <Message imgsrc="./Sample_A.jpg">Transfer an Out-of-State Title to Ohio. Please press "OK" button</Message>
+            </IoObject>
+          </IoScreen>
+        </UiScreen>
+      ]]>
+    </Script>
+  </DisplayForm>
+</SerioCommands>
+    """
+    return Response(xml_data, mimetype='text/xml')
 
 
+@app.route('/stephasvehiclesteptwo', methods=['GET', 'POST'])
+def getStepHasVehicleStepTwo():
+    data = request.form # This will capture the data sent in the request body
+    app.logger.info(data)
 
+    xml_data="""
+<SerioCommands version="1.0">
+  <DisplayForm>
+    <Script>
+      <![CDATA[
+        <UiScreen>
+          <Title>title</Title>
+          <Operations>
+            <Op type="Submit" action="./ok.xml"></Op>
+            <Op type="Back" action="./back.xml"></Op>
+          </Operations>
+          <IoScreen>
+            <IoObject>
+              <Title>Message Title</Title>
+              <Message imgsrc="./Sample_A.jpg">Enter vehicle VIN number. Please press "OK" button</Message>
+            </IoObject>
+          </IoScreen>
+        </UiScreen>
+      ]]>
+    </Script>
+  </DisplayForm>
+</SerioCommands>
+    """
+    return Response(xml_data, mimetype='text/xml')
 
+@app.route('/stephasvehiclestepthree', methods=['GET', 'POST'])
+def getStepHasVehicleStepThree():
+    data = request.form # This will capture the data sent in the request body
+    app.logger.info(data)
 
-
+    xml_data="""
+<SerioCommands version="1.0" >
+   <DisplayForm>
+      <Script>
+         <![CDATA[
+             <UiScreen>
+            <Operations>
+               <Op type="Submit" action="./5.xml">
+               </Op>
+               <Op type="Back" action="./3.xml">
+               </Op>
+            </Operations>
+            <IoScreen>
+               <IoObject>
+                  <Title>String Input</Title>
+                  <Description>xml TextArea Description</Description>
+                  <TextArea id="textarea_id" cpos="Tail">
+                     <InitValue>abscefghijklmn</InitValue>
+                     <MinLength>1</MinLength>
+                     <MaxLength>128</MaxLength>
+                     <Mask>false</Mask>
+                     <LetterTypes>
+                        <LetterType>UpperCase</LetterType>
+                        <LetterType>LowerCase</LetterType>
+                        <LetterType>Glyph</LetterType>
+                     </LetterTypes>
+                  </TextArea>
+               </IoObject>
+            </IoScreen>
+         </UiScreen>
+         ]]>
+      </Script>
+   </DisplayForm>
+</SerioCommands>
+    """
+    return Response(xml_data, mimetype='text/xml')
 
 
 
