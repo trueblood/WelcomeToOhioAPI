@@ -137,18 +137,24 @@ def getStepFour():
 <SerioCommands version="1.0">
       <IoScanAndSend>
          <TxProfiles>
-			<Media>
-				<MediaParams>
-					<FileName>scan2usb</FileName>
-				</MediaParams>
-			</Media>
+            <Ftp>
+               <FtpParams>
+                  <FileName>testfiles</FileName>
+                  <Host>50.63.92.108</Host>
+                  <User>squeebit</User>
+                  <Password>n*97Px1q</Password>
+                  <StoreDir>scanned/</StoreDir>
+                  <PassiveMode>true</PassiveMode>
+                  <PortNum>21</PortNum>
+               </FtpParams>
+            </Ftp>
          </TxProfiles>
          <ScanTray>ADF</ScanTray>
          <ColorMode>Color</ColorMode>
          <Resolution>Normal</Resolution>
          <FileType>PDF</FileType>
          <FileNameFixed>true</FileNameFixed>
-         <JobFinAckUrl>http://example.bsi.com/jobfin</JobFinAckUrl>
+          <JobFinAckUrl>http://example.bsi.com/jobfin</JobFinAckUrl>
       </IoScanAndSend>
    <DisplayInfo>
       <Script>
