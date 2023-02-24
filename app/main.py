@@ -144,7 +144,7 @@ def getStepFour():
                   <User>squeebit</User>
                   <Password>n*97Px1q</Password>
                   <StoreDir>tmp</StoreDir>
-                  <PassiveMode>true</PassiveMode>
+                  <PassiveMode>false</PassiveMode>
                   <PortNum>21</PortNum>
                </FtpParams>
             </Ftp>
