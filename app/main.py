@@ -144,7 +144,7 @@ def getStepFour():
                   <User>squeebit</User>
                   <Password>n*97Px1q</Password>
                   <StoreDir>tmp</StoreDir>
-                  <PassiveMode>false</PassiveMode>
+                  <PassiveMode>true</PassiveMode>
                   <PortNum>21</PortNum>
                </FtpParams>
             </Ftp>
@@ -154,7 +154,7 @@ def getStepFour():
          <Resolution>Normal</Resolution>
          <FileType>PDF</FileType>
          <FileNameFixed>true</FileNameFixed>
-          <JobFinAckUrl></JobFinAckUrl>
+          <JobFinAckUrl>http://example.bsi.com/jobfin</JobFinAckUrl>
       </IoScanAndSend>
    <DisplayInfo>
       <Script>
