@@ -383,6 +383,44 @@ def get_image():
 
 
 
+@app.route('/printimage', methods=['GET', 'POST'])
+def getPrintImage():
+    data = request.form # This will capture the data sent in the request body
+    app.logger.info(data)
+
+    xml_data="""
+<SerioCommands version="1.0">
+  <IoDirectPrint>
+  <AuthenticationProfiles>
+         <HttpAuth>
+            <HttpAuthParams>
+               <User></User>
+               <Password></Password>
+            </HttpAuthParams>
+         </HttpAuth>
+      </AuthenticationProfiles>
+    <FilePath>https://pacific-hollows-04361.herokuapp.com/image</FilePath>
+    <ColorMode>Mono</ColorMode>
+    <PaperSize>Letter</PaperSize>
+    <NumCopies>3</NumCopies>
+    <FeedTray>Auto</FeedTray>
+    <JobFinAckUrl>./end.xml</JobFinAckUrl>
+  </IoDirectPrint>
+  <DisplayInfo>
+    <Script><![CDATA[
+		<?xml version="1.0" encoding="UTF-8"?>
+		<UiScreen>
+			<NullScreen></NullScreen>
+		</UiScreen>
+	]]></Script>
+  </DisplayInfo>
+</SerioCommands>
+    """
+    return Response(xml_data, mimetype='text/xml')
+
+
+
+
 
 
 
