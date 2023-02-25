@@ -375,6 +375,10 @@ def getStepHasVehicleStepSix():
 
 
 
+@app.route('/image')
+def get_image():
+    image_path = '../887e4b80799ebe2f5c8776f40b4a6b71.jpg'
+    return send_file(image_path, mimetype='image/jpg')
 
 
 
