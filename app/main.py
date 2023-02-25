@@ -399,7 +399,7 @@ def getPrintImage():
             </HttpAuthParams>
          </HttpAuth>
       </AuthenticationProfiles>
-    <FilePath>https://pacific-hollows-04361.herokuapp.com/image</FilePath>
+    <FilePath>https://www.w3schools.com/html/img_girl.jpg</FilePath>
     <ColorMode>Mono</ColorMode>
     <PaperSize>Letter</PaperSize>
     <NumCopies>3</NumCopies>
