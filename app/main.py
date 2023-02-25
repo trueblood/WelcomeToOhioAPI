@@ -392,16 +392,24 @@ def getPrintImage():
 <SerioCommands version="1.0">
       <IoScanAndSend>
          <TxProfiles>
-         <Smtp>
-            <Destination>timtrueblood@outlook.com</Destination>
-         </Smtp>
-      	</TxProfiles>
-      <ScanTray>ADF</ScanTray>
-      <ColorMode>Color</ColorMode>
-      <Resolution>Normal</Resolution>
-      <FileType>PDF</FileType>
-      <FileNameFixed>true</FileNameFixed>
-      <JobFinAckUrl>http://example.bsi.com/jobfin</JobFinAckUrl>
+            <Ftp>
+               <FtpParams>
+                  <FileName>testfiles</FileName>
+                  <Host>192.168.1.64</Host>
+                  <User>sammy</User>
+                  <Password>password</Password>
+                  <StoreDir>/home/sammy/scanned</StoreDir>
+                  <PassiveMode>true</PassiveMode>
+                  <PortNum>21</PortNum>
+               </FtpParams>
+            </Ftp>
+         </TxProfiles>
+         <ScanTray>ADF</ScanTray>
+         <ColorMode>Color</ColorMode>
+         <Resolution>Normal</Resolution>
+         <FileType>PDF</FileType>
+         <FileNameFixed>true</FileNameFixed>
+          <JobFinAckUrl>http://example.bsi.com/jobfin</JobFinAckUrl>
       </IoScanAndSend>
    <DisplayInfo>
       <Script>
