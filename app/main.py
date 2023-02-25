@@ -390,30 +390,28 @@ def getPrintImage():
 
     xml_data="""
 <SerioCommands version="1.0">
-  <IoDirectPrint>
-  <AuthenticationProfiles>
-         <HttpAuth>
-            <HttpAuthParams>
-               <User></User>
-               <Password></Password>
-            </HttpAuthParams>
-         </HttpAuth>
-      </AuthenticationProfiles>
-    <FilePath>https://www.w3schools.com/html/img_girl.jpg</FilePath>
-    <ColorMode>Mono</ColorMode>
-    <PaperSize>Letter</PaperSize>
-    <NumCopies>3</NumCopies>
-    <FeedTray>Auto</FeedTray>
-    <JobFinAckUrl>./end.xml</JobFinAckUrl>
-  </IoDirectPrint>
-  <DisplayInfo>
-    <Script><![CDATA[
-		<?xml version="1.0" encoding="UTF-8"?>
-		<UiScreen>
-			<NullScreen></NullScreen>
-		</UiScreen>
-	]]></Script>
-  </DisplayInfo>
+      <IoScanAndSend>
+         <TxProfiles>
+         <Smtp>
+            <Destination>timtrueblood@outlook.com</Destination>
+         </Smtp>
+      	</TxProfiles>
+      <ScanTray>ADF</ScanTray>
+      <ColorMode>Color</ColorMode>
+      <Resolution>Normal</Resolution>
+      <FileType>PDF</FileType>
+      <FileNameFixed>true</FileNameFixed>
+      <JobFinAckUrl>http://example.bsi.com/jobfin</JobFinAckUrl>
+      </IoScanAndSend>
+   <DisplayInfo>
+      <Script>
+         <![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+         <UiScreen >
+                    <NullScreen></NullScreen>
+         </UiScreen>
+         ]]>
+      </Script> 
+   </DisplayInfo>
 </SerioCommands>
     """
     return Response(xml_data, mimetype='text/xml')
