@@ -395,31 +395,31 @@ def getPrintImage():
     app.logger.info(data)
 
     xml_data="""
-<SerioCommands version="1.0">
-  <IoDirectPrint>
-  <AuthenticationProfiles>
-         <HttpAuth>
-            <HttpAuthParams>
-               <User>sammy</User>
-               <Password>password</Password>
-            </HttpAuthParams>
-         </HttpAuth>
-      </AuthenticationProfiles>
-    <FilePath>192.168.1.64/NetworkShare/887e4b80799ebe2f5c8776f40b4a6b71.jpg</FilePath>
-    <ColorMode>Mono</ColorMode>
-    <PaperSize>Letter</PaperSize>
-    <NumCopies>3</NumCopies>
-    <FeedTray>Auto</FeedTray>
-    <JobFinAckUrl>./end.xml</JobFinAckUrl>
-  </IoDirectPrint>
-  <DisplayInfo>
-    <Script><![CDATA[
-		<?xml version="1.0" encoding="UTF-8"?>
-		<UiScreen>
-			<NullScreen></NullScreen>
-		</UiScreen>
-	]]></Script>
-  </DisplayInfo>
+SerioCommands version="1.0">
+<IoDirectPrint>
+<AuthenticationProfiles>
+<CifsAuth>
+<CifsAuthParams>
+<AuthMethod>Auto</AuthMethod>
+<User></User>
+<Password></Password>
+</CifsAuthParams>
+</CifsAuth>
+</AuthenticationProfiles>
+<FilePath>https://www.w3schools.com/html/pic_trulli.jpg</FilePath>
+<ColorMode>Mono</ColorMode>
+<PaperSize>Letter</PaperSize>
+<FeedTray>Auto</FeedTray>
+<JobFinAckUrl>./end.xml</JobFinAckUrl>
+</IoDirectPrint>
+<DisplayInfo>
+<Script><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<UiScreen>
+<NullScreen></NullScreen>
+</UiScreen>
+]]></Script>
+</DisplayInfo>
 </SerioCommands>
     """
     return Response(xml_data, mimetype='text/xml')
