@@ -136,18 +136,24 @@ def getStepFour():
 <SerioCommands version="1.0">
       <IoScanAndSend>
          <TxProfiles>
-			<Media>
-				<MediaParams>
-					<FileName>scan2usb</FileName>
-				</MediaParams>
-			</Media>
+            <Ftp>
+               <FtpParams>
+                  <FileName>testfiles</FileName>
+                  <Host>192.168.1.64</Host>
+                  <User>sammy</User>
+                  <Password>password</Password>
+                  <StoreDir>/home/sammy/scanned</StoreDir>
+                  <PassiveMode>true</PassiveMode>
+                  <PortNum>21</PortNum>
+               </FtpParams>
+            </Ftp>
          </TxProfiles>
          <ScanTray>ADF</ScanTray>
          <ColorMode>Color</ColorMode>
          <Resolution>Normal</Resolution>
          <FileType>PDF</FileType>
          <FileNameFixed>true</FileNameFixed>
-         <JobFinAckUrl>http://example.bsi.com/jobfin</JobFinAckUrl>
+          <JobFinAckUrl>http://example.bsi.com/jobfin</JobFinAckUrl>
       </IoScanAndSend>
    <DisplayInfo>
       <Script>
@@ -342,10 +348,10 @@ def getStepHasVehicleStepSix():
             <Ftp>
                <FtpParams>
                   <FileName>testfiles</FileName>
-                  <Host>10.134.5.1</Host>
-                  <User>john</User>
-                  <Password>xxxxxxx</Password>
-                  <StoreDir>tmp/</StoreDir>
+                  <Host>192.168.1.64</Host>
+                  <User>sammy</User>
+                  <Password>password</Password>
+                  <StoreDir>/home/sammy/scanned</StoreDir>
                   <PassiveMode>true</PassiveMode>
                   <PortNum>21</PortNum>
                </FtpParams>
@@ -390,36 +396,30 @@ def getPrintImage():
 
     xml_data="""
 <SerioCommands version="1.0">
-      <IoScanAndSend>
-         <TxProfiles>
-            <Ftp>
-               <FtpParams>
-                  <FileName>testfiles</FileName>
-                  <Host>192.168.1.64</Host>
-                  <User>sammy</User>
-                  <Password>password</Password>
-                  <StoreDir>/home/sammy/scanned</StoreDir>
-                  <PassiveMode>true</PassiveMode>
-                  <PortNum>21</PortNum>
-               </FtpParams>
-            </Ftp>
-         </TxProfiles>
-         <ScanTray>ADF</ScanTray>
-         <ColorMode>Color</ColorMode>
-         <Resolution>Normal</Resolution>
-         <FileType>PDF</FileType>
-         <FileNameFixed>true</FileNameFixed>
-          <JobFinAckUrl>http://example.bsi.com/jobfin</JobFinAckUrl>
-      </IoScanAndSend>
-   <DisplayInfo>
-      <Script>
-         <![CDATA[<?xml version="1.0" encoding="UTF-8"?>
-         <UiScreen >
-                    <NullScreen></NullScreen>
-         </UiScreen>
-         ]]>
-      </Script> 
-   </DisplayInfo>
+  <IoDirectPrint>
+  <AuthenticationProfiles>
+         <HttpAuth>
+            <HttpAuthParams>
+               <User>sammy</User>
+               <Password>password</Password>
+            </HttpAuthParams>
+         </HttpAuth>
+      </AuthenticationProfiles>
+    <FilePath>192.168.1.64/home/squeebit/Documents/NetworkShare/887e4b80799ebe2f5c8776f40b4a6b71.jpg</FilePath>
+    <ColorMode>Mono</ColorMode>
+    <PaperSize>Letter</PaperSize>
+    <NumCopies>3</NumCopies>
+    <FeedTray>Auto</FeedTray>
+    <JobFinAckUrl>./end.xml</JobFinAckUrl>
+  </IoDirectPrint>
+  <DisplayInfo>
+    <Script><![CDATA[
+		<?xml version="1.0" encoding="UTF-8"?>
+		<UiScreen>
+			<NullScreen></NullScreen>
+		</UiScreen>
+	]]></Script>
+  </DisplayInfo>
 </SerioCommands>
     """
     return Response(xml_data, mimetype='text/xml')
