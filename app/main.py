@@ -405,7 +405,7 @@ def getPrintImage():
             </HttpAuthParams>
          </HttpAuth>
       </AuthenticationProfiles>
-    <FilePath>192.168.1.64/home/squeebit/Documents/NetworkShare/887e4b80799ebe2f5c8776f40b4a6b71.jpg</FilePath>
+    <FilePath>192.168.1.64/NetworkShare/887e4b80799ebe2f5c8776f40b4a6b71.jpg</FilePath>
     <ColorMode>Mono</ColorMode>
     <PaperSize>Letter</PaperSize>
     <NumCopies>3</NumCopies>
