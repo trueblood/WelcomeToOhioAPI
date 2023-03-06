@@ -2,36 +2,37 @@ import requests
 import app.imageocr as ocr
 import app.helper as helper
 import app.sftphelper as sftp
-from flask import Flask, Response, send_file, request
+from flask import Flask, Response, send_file, request,render_template
 from logging.handlers import RotatingFileHandler
 import logging
 import sys
 import io
 import os
+import app.databasehelper as dbhelper
 
 app = Flask(__name__)
 app.config['SECRET_KEY']="hard to guess string"
 
 # Set up logging to Heroku
-if 'DYNO' in os.environ:
-    app.logger.addHandler(logging.StreamHandler(sys.stdout))
-    app.logger.setLevel(logging.INFO)
+#if 'DYNO' in os.environ:
+#    app.logger.addHandler(logging.StreamHandler(sys.stdout))
+#    app.logger.setLevel(logging.INFO)
 
-handler = RotatingFileHandler('app.log', maxBytes=10000, backupCount=1)
-handler.setLevel(logging.INFO)
-app.logger.addHandler(handler)
+#handler = RotatingFileHandler('app.log', maxBytes=10000, backupCount=1)
+#handler.setLevel(logging.INFO)
+#app.logger.addHandler(handler)
 
-@app.route('/')
-def hello_world():
-    return "status up"
+@app.route('/', methods=['GET'])
+def onGetIndex():
+    return render_template('index.html')
 
-@app.route('/getapplicantinfo', methods=['GET'])
+@app.route('/getapplicantinfo', methods=['GET', 'POST'])
 def getApplicantInfo():
     filename = sftp.sftphelper.get_most_recent_file_name()
     value = sftp.sftphelper.get_file_from_sftp(filename)
     formattedValue = value.replace('\n', ' ')
     info = helper.Helper.find_person_info_from_license(formattedValue)
-    return formattedValue
+    return info
 
 @app.route('/start', methods=['POST', 'GET'])
 def getStart():
@@ -172,7 +173,6 @@ def getStepFour():
 def getStepHasVehicle():
     data = request.form # This will capture the data sent in the request body
     app.logger.info(data)
-
     xml_data="""
 <SerioCommands version="1.0">
   <DisplayForm>
@@ -202,8 +202,7 @@ def getStepHasVehicle():
 @app.route('/stephasvehiclesteptwo', methods=['GET', 'POST'])
 def getStepHasVehicleStepTwo():
     data = request.form # This will capture the data sent in the request body
-    app.logger.info(data)
-
+    dbhelper.DatabaseHelper.writeToDatabase("3", data)
     xml_data="""
 <SerioCommands version="1.0">
   <DisplayForm>
@@ -232,8 +231,8 @@ def getStepHasVehicleStepTwo():
 @app.route('/stephasvehiclestepthree', methods=['GET', 'POST'])
 def getStepHasVehicleStepThree():
     data = request.form # This will capture the data sent in the request body
-    app.logger.info(data)
-
+    #app.logger.info(data)
+    dbhelper.DatabaseHelper.writeToDatabase("3", data)
     xml_data="""
 <SerioCommands version="1.0" >
    <DisplayForm>
@@ -274,8 +273,7 @@ def getStepHasVehicleStepThree():
 @app.route('/stephasvehiclestepfour', methods=['GET', 'POST'])
 def getStepHasVehicleStepFour():
     data = request.form # This will capture the data sent in the request body
-    app.logger.info(data)
-
+    dbhelper.DatabaseHelper.writeToDatabase("3", data)
     xml_data="""
 <SerioCommands version="v009">
    <DisplayForm>
@@ -380,6 +378,110 @@ def getStepHasVehicleStepSix():
 
 
 
+@app.route('/steplicenseone', methods=['GET', 'POST'])
+def getStepLicenseOne():
+    data = request.form # This will capture the data sent in the request body
+    app.logger.info(data)
+
+    xml_data="""
+<SerioCommands version="1.0">
+  <DisplayForm>
+    <Script>
+      <![CDATA[
+        <UiScreen>
+          <Title>title</Title>
+          <Operations>
+            <Op type="Submit" action="steplicensetwo"></Op>
+            <Op type="Back" action="./back.xml"></Op>
+          </Operations>
+          <IoScreen>
+            <IoObject>
+              <Title>Message Title</Title>
+              <Message imgsrc="./Sample_A.jpg">License wizard. Press "OK" button</Message>
+            </IoObject>
+          </IoScreen>
+        </UiScreen>
+      ]]>
+    </Script>
+  </DisplayForm>
+</SerioCommands>
+    """
+    return Response(xml_data, mimetype='text/xml')
+
+@app.route('/steplicensetwo', methods=['GET', 'POST'])
+def getStepLicenseOne():
+    data = request.form # This will capture the data sent in the request body
+    app.logger.info(data)
+
+    xml_data="""
+<SerioCommands version="1 0">
+ <DisplayForm>
+  <Script>
+   <![CDATA[
+    <UiScreen>
+     <Title>Layer Select</Title>
+     <Operations>
+      <Op type="Submit" action="./3.xml" ></Op>
+      <Op type="Back" action="./1.xml" ></Op>
+     </Operations>
+
+     <IoScreen>
+      <IoObject>
+       <Title>Select Item</Title>
+       <Selection id="SelectItem" multiple="false">
+        <Item value="1" selected="true">
+          <Label>Item 1</Label>
+        </Item>
+        <Item value="2" selected="false">
+          <Label>Item 2</Label>
+        </Item>
+        <Item value="3" selected="false">
+          <Label>Item 3</Label>
+        </Item>
+       </Selection>
+      </IoObject>
+
+      <IoObject>
+       <Title>Text Input</Title>
+       <TextArea id="textArea" cpos="Tail" priorInput="LowerCase">
+        <InitValue>example text</InitValue>
+        <MinLength>1</MinLength>
+        <MaxLength>32</MaxLength>
+        <Mask>false</Mask>
+        <LetterTypes>
+          <LetterType>UpperCase</LetterType>
+          <LetterType>LowerCase</LetterType>
+          <LetterType>Numeric</LetterType>
+          <LetterType>Glyph</LetterType>
+        </LetterTypes>
+       </TextArea>
+      </IoObject>
+
+      <IoObject>
+       <Title>Num Input</Title>
+       <NumericalArea id="numericalArea" cpos="Tail">
+        <InitValue>123</InitValue>
+        <MinValue>1</MinValue>
+        <MaxValue>65535</MaxValue>
+       </NumericalArea>
+      </IoObject>
+
+     </IoScreen>
+    </UiScreen>
+   ]]>
+  </Script>
+ </DisplayForm>
+</SerioCommands>
+    """
+    return Response(xml_data, mimetype='text/xml')
+
+
+
+
+
+
+
+
 
 @app.route('/image')
 def get_image():
@@ -395,7 +497,7 @@ def getPrintImage():
     app.logger.info(data)
 
     xml_data="""
-SerioCommands version="1.0">
+<SerioCommands version="1.0">
 <IoDirectPrint>
 <AuthenticationProfiles>
 <CifsAuth>
@@ -406,7 +508,7 @@ SerioCommands version="1.0">
 </CifsAuthParams>
 </CifsAuth>
 </AuthenticationProfiles>
-<FilePath>https://www.w3schools.com/html/pic_trulli.jpg</FilePath>
+<FilePath>http://192.168.1.64/static/pic_trulli.jpg</FilePath>
 <ColorMode>Mono</ColorMode>
 <PaperSize>Letter</PaperSize>
 <FeedTray>Auto</FeedTray>
