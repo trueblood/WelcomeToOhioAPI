@@ -272,8 +272,7 @@ def getStepHasVehicleStepThree():
 @app.route('/stephasvehiclestepfour', methods=['GET', 'POST'])
 def getStepHasVehicleStepFour():
     data = request.form # This will capture the data sent in the request body
-    import xml.etree.ElementTree as ET
-    
+
     substring = '<Value>'
     indexOne = str(data).index(substring)
     substringTwo = '</Value>'
@@ -489,9 +488,38 @@ def getStepLicenseTwo():
 @app.route('/steplicensethree', methods=['GET', 'POST'])
 def getStepLicenseThree():
     data = request.form # This will capture the data sent in the request body
-    app.logger.info(data)
 
-    xml_data="""
+    substring = '<Value>'
+    indexOne = str(data).index(substring)
+    substringTwo = '</Value>'
+    indexTwo = str(data).index(substringTwo)
+    value = str(data)[indexOne+7:indexTwo]
+    #dbhelper.DatabaseHelper.writeToDatabase("4", value)
+    if (value == "1"):
+        xml_data="""
+        <SerioCommands version="1.0">
+  <DisplayForm>
+    <Script>
+      <![CDATA[
+        <UiScreen>
+          <Title>title</Title>
+          <Operations>
+            <Op type="Submit" action="steplicenseeight"></Op>
+            <Op type="Back" action="./back.xml"></Op>
+          </Operations>
+          <IoScreen>
+            <IoObject>
+              <Title>Information</Title>
+              <Message imgsrc="./Sample_A.jpg">We are now going to scan the required documents. Please insert into scanner and click the "OK" button.</Message>
+            </IoObject>
+          </IoScreen>
+        </UiScreen>
+      ]]>
+    </Script>
+  </DisplayForm>
+</SerioCommands> """
+    elif (value == "2"):
+      xml_data="""
 <SerioCommands version="1.0">
   <DisplayForm>
     <Script>
@@ -513,6 +541,37 @@ def getStepLicenseThree():
     </Script>
   </DisplayForm>
 </SerioCommands>
+    """
+    elif (value == "3"):
+      xml_data="""
+<SerioCommands version="1.0">
+<IoDirectPrint>
+<AuthenticationProfiles>
+<CifsAuth>
+<CifsAuthParams>
+<AuthMethod>Auto</AuthMethod>
+<User></User>
+<Password></Password>
+</CifsAuthParams>
+</CifsAuth>
+</AuthenticationProfiles>
+<FilePath>http://192.168.1.64/static/bmv21591024_1.jpg</FilePath>
+<ColorMode>Mono</ColorMode>
+<PaperSize>Letter</PaperSize>
+<FeedTray>Auto</FeedTray>
+<JobFinAckUrl>./end.xml</JobFinAckUrl>
+</IoDirectPrint>
+<DisplayInfo>
+<Script><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<UiScreen>
+<NullScreen></NullScreen>
+</UiScreen>
+]]></Script>
+</DisplayInfo>
+</SerioCommands>
+
+
     """
     return Response(xml_data, mimetype='text/xml')
 
