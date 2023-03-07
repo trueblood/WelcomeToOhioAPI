@@ -544,6 +544,38 @@ def getStepLicenseThree():
     """
     elif (value == "3"):
       xml_data="""
+
+<SerioCommands version="1.0">
+  <DisplayForm>
+    <Script>
+      <![CDATA[
+        <UiScreen>
+          <Title>title</Title>
+          <Operations>
+            <Op type="Submit" action="stepthreehalf"></Op>
+            <Op type="Back" action="./back.xml"></Op>
+          </Operations>
+          <IoScreen>
+            <IoObject>
+              <Title>Message Title</Title>
+              <Message imgsrc="./Sample_A.jpg">We are going to print form BMV2159. Please press "OK" button</Message>
+            </IoObject>
+          </IoScreen>
+        </UiScreen>
+      ]]>
+    </Script>
+  </DisplayForm>
+</SerioCommands>
+    """
+    return Response(xml_data, mimetype='text/xml')
+
+
+@app.route('/stepthreehalf', methods=['GET', 'POST'])
+def getStepThreeHalf():
+    data = request.form # This will capture the data sent in the request body
+    app.logger.info(data)
+
+    xml_data="""
 <SerioCommands version="1.0">
 <IoDirectPrint>
 <AuthenticationProfiles>
@@ -559,7 +591,7 @@ def getStepLicenseThree():
 <ColorMode>Mono</ColorMode>
 <PaperSize>Letter</PaperSize>
 <FeedTray>Auto</FeedTray>
-<JobFinAckUrl>./end.xml</JobFinAckUrl>
+<JobFinAckUrl>licensestepeighthalf</JobFinAckUrl>
 </IoDirectPrint>
 <DisplayInfo>
 <Script><![CDATA[
@@ -570,7 +602,6 @@ def getStepLicenseThree():
 ]]></Script>
 </DisplayInfo>
 </SerioCommands>
-
 
     """
     return Response(xml_data, mimetype='text/xml')
@@ -766,6 +797,36 @@ def get_image():
     image_path = '../887e4b80799ebe2f5c8776f40b4a6b71.jpg'
     return send_file(image_path, mimetype='image/jpg')
 
+@app.route('/licensestepeighthalf', methods=['GET', 'POST'])
+def getLicenseStepEightHalf():
+    data = request.form # This will capture the data sent in the request body
+    app.logger.info(data)
+
+    xml_data="""
+<SerioCommands version="v009">
+   <DisplayForm>
+      <Script>
+         <![CDATA[
+         <UiScreen>
+            <Title>EitherOr Select</Title>
+            <LinkScreen>
+               <Description>HAZMAT endorsement? Please select "Yes" or "No"</Description>
+               <EitherOrControl>
+                  <ItemY href="./8.xml">
+                     <Label>Yes</Label>
+                  </ItemY>
+                  <ItemN href="licensestepten"> 
+                     <Label>No</Label>
+                  </ItemN>
+               </EitherOrControl>
+            </LinkScreen>
+         </UiScreen>
+         ]]>
+      </Script>
+   </DisplayForm>
+</SerioCommands>
+    """
+    return Response(xml_data, mimetype='text/xml')
 
 
 
@@ -782,7 +843,7 @@ def getLicenseStepNine():
         <UiScreen>
           <Title>title</Title>
           <Operations>
-            <Op type="Submit" action="printimage "></Op>
+            <Op type="Submit" action="printimage"></Op>
             <Op type="Back" action="./back.xml"></Op>
           </Operations>
           <IoScreen>
@@ -795,6 +856,79 @@ def getLicenseStepNine():
       ]]>
     </Script>
   </DisplayForm>
+</SerioCommands>
+    """
+    return Response(xml_data, mimetype='text/xml')
+
+
+@app.route('/licensestepten', methods=['GET', 'POST'])
+def getLicenseStepTen():
+    data = request.form # This will capture the data sent in the request body
+    app.logger.info(data)
+
+    xml_data="""
+<SerioCommands version="1.0">
+  <DisplayForm>
+    <Script>
+      <![CDATA[
+        <UiScreen>
+          <Title>title</Title>
+          <Operations>
+            <Op type="Submit" action="licensestepeleven"></Op>
+            <Op type="Back" action="./back.xml"></Op>
+          </Operations>
+          <IoScreen>
+            <IoObject>
+              <Title>Information</Title>
+              <Message imgsrc="./Sample_A.jpg">We are now going to scan identity documents. Please click the "OK" button.</Message>
+            </IoObject>
+          </IoScreen>
+        </UiScreen>
+      ]]>
+    </Script>
+  </DisplayForm>
+</SerioCommands>
+    """
+    return Response(xml_data, mimetype='text/xml')
+
+
+@app.route('/licensestepeleven', methods=['GET', 'POST'])
+def getLicenseStepEleven():
+    data = request.form # This will capture the data sent in the request body
+    app.logger.info(data)
+
+    xml_data="""
+<SerioCommands version="1.0">
+      <IoScanAndSend>
+         <TxProfiles>
+            <Ftp>
+               <FtpParams>
+                  <FileName>identitydocuments</FileName>
+                  <Host>192.168.1.64</Host>
+                  <User>sammy</User>
+                  <Password>password</Password>
+                  <StoreDir>/home/sammy/scanned</StoreDir>
+                  <PassiveMode>true</PassiveMode>
+                  <PortNum>21</PortNum>
+               </FtpParams>
+            </Ftp>
+         </TxProfiles>
+         <ScanTray>ADF</ScanTray>
+         <ColorMode>Color</ColorMode>
+         <Resolution>Normal</Resolution>
+         <FileType>PDF</FileType>
+         <FileNameFixed>true</FileNameFixed>
+          <JobFinAckUrl>http://192.168.1.64/licensestepnine</JobFinAckUrl>
+      </IoScanAndSend>
+   <DisplayInfo>
+      <Script>
+         <![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+         <UiScreen >
+                    <NullScreen></NullScreen>
+         </UiScreen>
+         ]]>
+      </Script> 
+   </DisplayInfo>
 </SerioCommands>
     """
     return Response(xml_data, mimetype='text/xml')
