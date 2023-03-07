@@ -202,7 +202,6 @@ def getStepHasVehicle():
 @app.route('/stephasvehiclesteptwo', methods=['GET', 'POST'])
 def getStepHasVehicleStepTwo():
     data = request.form # This will capture the data sent in the request body
-    dbhelper.DatabaseHelper.writeToDatabase("3", data)
     xml_data="""
 <SerioCommands version="1.0">
   <DisplayForm>
@@ -232,7 +231,7 @@ def getStepHasVehicleStepTwo():
 def getStepHasVehicleStepThree():
     data = request.form # This will capture the data sent in the request body
     #app.logger.info(data)
-    dbhelper.DatabaseHelper.writeToDatabase("3", data)
+
     xml_data="""
 <SerioCommands version="1.0" >
    <DisplayForm>
@@ -273,7 +272,14 @@ def getStepHasVehicleStepThree():
 @app.route('/stephasvehiclestepfour', methods=['GET', 'POST'])
 def getStepHasVehicleStepFour():
     data = request.form # This will capture the data sent in the request body
-    dbhelper.DatabaseHelper.writeToDatabase("3", data)
+    import xml.etree.ElementTree as ET
+    
+    substring = '<Value>'
+    indexOne = str(data).index(substring)
+    substringTwo = '</Value>'
+    indexTwo = str(data).index(substringTwo)
+    value = str(data)[indexOne+7:indexTwo]
+    dbhelper.DatabaseHelper.writeToDatabase("4", value)
     xml_data="""
 <SerioCommands version="v009">
    <DisplayForm>
@@ -284,7 +290,7 @@ def getStepHasVehicleStepFour():
             <LinkScreen>
                <Description>Does the owner have a loan on the vehicle? Please select "Yes" or "No"</Description>
                <EitherOrControl>
-                  <ItemY href="stephasvehiclestepfive">
+                  <ItemY href="stephasvehiclestepfourandhalf">
                      <Label>Yes</Label>
                   </ItemY>
                   <ItemN href="./0.xml"> 
@@ -300,6 +306,35 @@ def getStepHasVehicleStepFour():
     """
     return Response(xml_data, mimetype='text/xml')
 
+@app.route('/stephasvehiclestepfourandhalf', methods=['GET', 'POST'])
+def getStepHasVehicleStepFourAndHalf():
+    data = request.form # This will capture the data sent in the request body
+    dbhelper.DatabaseHelper.writeToDatabase("3", data)
+    xml_data="""
+<SerioCommands version="v009">
+   <DisplayForm>
+      <Script>
+         <![CDATA[
+         <UiScreen>
+            <Title>EitherOr Select</Title>
+            <LinkScreen>
+               <Description>Does the vehicle have multiple owners? Please select "Yes" or "No"</Description>
+               <EitherOrControl>
+                  <ItemY href="">
+                     <Label>Yes</Label>
+                  </ItemY>
+                  <ItemN href="stephasvehiclestepfive"> 
+                     <Label>No</Label>
+                  </ItemN>
+               </EitherOrControl>
+            </LinkScreen>
+         </UiScreen>
+         ]]>
+      </Script>
+   </DisplayForm>
+</SerioCommands>
+    """
+    return Response(xml_data, mimetype='text/xml')
 
 
 @app.route('/stephasvehiclestepfive', methods=['GET', 'POST'])
@@ -688,7 +723,7 @@ def getLicenseStepNine():
         <UiScreen>
           <Title>title</Title>
           <Operations>
-            <Op type="Submit" action="printimage"></Op>
+            <Op type="Submit" action="printimage "></Op>
             <Op type="Back" action="./back.xml"></Op>
           </Operations>
           <IoScreen>
@@ -722,7 +757,7 @@ def getPrintImage():
 </CifsAuthParams>
 </CifsAuth>
 </AuthenticationProfiles>
-<FilePath>http://192.168.1.64/static/page0002.jpg</FilePath>
+<FilePath>http://192.168.1.64/static/testfiles1024_1.jpg</FilePath>
 <ColorMode>Mono</ColorMode>
 <PaperSize>Letter</PaperSize>
 <FeedTray>Auto</FeedTray>
@@ -739,12 +774,6 @@ def getPrintImage():
 </SerioCommands>
     """
     return Response(xml_data, mimetype='text/xml')
-
-
-
-
-
-
 
 
 

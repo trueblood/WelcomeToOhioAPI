@@ -5,7 +5,7 @@ import pytesseract
 
 sftp_hostname = 'sparkling-water-50295.sftptogo.com'
 sftp_username = 'fed873fba5c5afdd136d105b813ae2'
-sftp_password = 'rtvxr0u8n7m0o7qnimuleyr1agla41c061jtx7c4'
+sftp_password = 'z6pajlv30n2ghbaxr62z4jrwger1sfgsnsq4oyuo'
 
 class sftphelper():
     def get_most_recent_file_name():
