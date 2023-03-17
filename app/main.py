@@ -154,7 +154,7 @@ def getStepFour():
          <Resolution>Normal</Resolution>
          <FileType>PDF</FileType>
          <FileNameFixed>true</FileNameFixed>
-          <JobFinAckUrl>http://example.bsi.com/jobfin</JobFinAckUrl>
+          <JobFinAckUrl>stepfive</JobFinAckUrl>
       </IoScanAndSend>
    <DisplayInfo>
       <Script>
@@ -168,6 +168,37 @@ def getStepFour():
 </SerioCommands>
     """
     return Response(xml_data, mimetype='text/xml')
+
+@app.route('/stepfive', methods=['GET', 'POST'])
+def getStepFive():
+    data = request.form # This will capture the data sent in the request body
+    app.logger.info(data)
+
+    xml_data="""
+<SerioCommands version="1.0">
+  <DisplayForm>
+    <Script>
+      <![CDATA[
+        <UiScreen>
+          <Title>title</Title>
+          <Operations>
+            <Op type="Submit" action="./ok.xml"></Op>
+            <Op type="Back" action="./back.xml"></Op>
+          </Operations>
+          <IoScreen>
+            <IoObject>
+              <Title>Message Title</Title>
+              <Message imgsrc="./Sample_A.jpg">Scan sent successfully. Please press "OK" button</Message>
+            </IoObject>
+          </IoScreen>
+        </UiScreen>
+      ]]>
+    </Script>
+  </DisplayForm>
+</SerioCommands>
+    """
+    return Response(xml_data, mimetype='text/xml')
+
 
 @app.route('/stephasvehicle', methods=['GET', 'POST'])
 def getStepHasVehicle():
@@ -249,9 +280,9 @@ def getStepHasVehicleStepThree():
                   <Title>String Input</Title>
                   <Description>xml TextArea Description</Description>
                   <TextArea id="textarea_id" cpos="Tail">
-                     <InitValue>abscefghijklmn</InitValue>
-                     <MinLength>1</MinLength>
-                     <MaxLength>128</MaxLength>
+                     <InitValue>abscefghijklmnopt</InitValue>
+                     <MinLength>17</MinLength>
+                     <MaxLength>18</MaxLength>
                      <Mask>false</Mask>
                      <LetterTypes>
                         <LetterType>UpperCase</LetterType>
@@ -292,7 +323,7 @@ def getStepHasVehicleStepFour():
                   <ItemY href="stephasvehiclestepfourandhalf">
                      <Label>Yes</Label>
                   </ItemY>
-                  <ItemN href="./0.xml"> 
+                  <ItemN href="stephasvehiclestepfourandhalf"> 
                      <Label>No</Label>
                   </ItemN>
                </EitherOrControl>
@@ -849,7 +880,7 @@ def getLicenseStepNine():
           <IoScreen>
             <IoObject>
               <Title>Information</Title>
-              <Message imgsrc="./Sample_A.jpg">We are now going to print form BMV_5750. Please click the "OK" button.</Message>
+              <Message imgsrc="./Sample_A.jpg">We are now going to print form BMV_5745. Please click the "OK" button.</Message>
             </IoObject>
           </IoScreen>
         </UiScreen>
@@ -918,7 +949,7 @@ def getLicenseStepEleven():
          <Resolution>Normal</Resolution>
          <FileType>PDF</FileType>
          <FileNameFixed>true</FileNameFixed>
-          <JobFinAckUrl>http://192.168.1.64/licensestepnine</JobFinAckUrl>
+          <JobFinAckUrl>stepfive</JobFinAckUrl>
       </IoScanAndSend>
    <DisplayInfo>
       <Script>
@@ -970,3 +1001,313 @@ def getPrintImage():
 
 
 
+@app.route('/printbillofsale', methods=['GET', 'POST'])
+def getPrintBillOfSale():
+    data = request.form # This will capture the data sent in the request body
+    app.logger.info(data)
+
+    xml_data="""
+<SerioCommands version="1.0">
+<IoDirectPrint>
+<AuthenticationProfiles>
+<CifsAuth>
+<CifsAuthParams>
+<AuthMethod>Auto</AuthMethod>
+<User></User>
+<Password></Password>
+</CifsAuthParams>
+</CifsAuth>
+</AuthenticationProfiles>
+<FilePath>http://192.168.1.64/static/basic-payment-receipt-template-1.jpg</FilePath>
+<ColorMode>Mono</ColorMode>
+<PaperSize>Letter</PaperSize>
+<FeedTray>Auto</FeedTray>
+<JobFinAckUrl>./end.xml</JobFinAckUrl>
+</IoDirectPrint>
+<DisplayInfo>
+<Script><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<UiScreen>
+<NullScreen></NullScreen>
+</UiScreen>
+]]></Script>
+</DisplayInfo>
+</SerioCommands>
+    """
+    return Response(xml_data, mimetype='text/xml')
+
+
+@app.route('/steapaddressone', methods=['GET', 'POST'])
+def getStepAddressOne():
+    data = request.form # This will capture the data sent in the request body
+    app.logger.info(data)
+
+    xml_data="""
+<SerioCommands version="1.0">
+  <DisplayForm>
+    <Script>
+      <![CDATA[
+        <UiScreen>
+          <Title>title</Title>
+          <Operations>
+            <Op type="Submit" action="stepaddresstwo"></Op>
+            <Op type="Back" action="./back.xml"></Op>
+          </Operations>
+          <IoScreen>
+            <IoObject>
+              <Title>Message Title</Title>
+              <Message imgsrc="./Sample_A.jpg">Enter applicants new street address. Then please press "OK" button</Message>
+            </IoObject>
+          </IoScreen>
+        </UiScreen>
+      ]]>
+    </Script>
+  </DisplayForm>
+</SerioCommands>
+    """
+    return Response(xml_data, mimetype='text/xml')
+
+@app.route('/stepaddresstwo', methods=['GET', 'POST'])
+def getStepAddressTwo():
+    data = request.form # This will capture the data sent in the request body
+    app.logger.info(data)
+
+    xml_data="""
+<SerioCommands version="1.0" >
+   <DisplayForm>
+      <Script>
+         <![CDATA[
+             <UiScreen>
+            <Operations>
+               <Op type="Submit" action="steapaddressthree">
+               </Op>
+               <Op type="Back" action="./3.xml">
+               </Op>
+            </Operations>
+            <IoScreen>
+               <IoObject>
+                  <Title>String Input</Title>
+                  <Description>xml TextArea Description</Description>
+                  <TextArea id="textarea_id" cpos="Tail">
+                     <InitValue>abscefghijklmn</InitValue>
+                     <MinLength>1</MinLength>
+                     <MaxLength>128</MaxLength>
+                     <Mask>false</Mask>
+                     <LetterTypes>
+                        <LetterType>UpperCase</LetterType>
+                        <LetterType>LowerCase</LetterType>
+                        <LetterType>Glyph</LetterType>
+                     </LetterTypes>
+                  </TextArea>
+               </IoObject>
+            </IoScreen>
+         </UiScreen>
+         ]]>
+      </Script>
+   </DisplayForm>
+</SerioCommands>
+    """
+    return Response(xml_data, mimetype='text/xml')
+
+@app.route('/steapaddressthree', methods=['GET', 'POST'])
+def getStepAddressThree():
+    data = request.form # This will capture the data sent in the request body
+    app.logger.info(data)
+
+    xml_data="""
+<SerioCommands version="1.0">
+  <DisplayForm>
+    <Script>
+      <![CDATA[
+        <UiScreen>
+          <Title>title</Title>
+          <Operations>
+            <Op type="Submit" action="steapaddressfour"></Op>
+            <Op type="Back" action="./back.xml"></Op>
+          </Operations>
+          <IoScreen>
+            <IoObject>
+              <Title>Message Title</Title>
+              <Message imgsrc="./Sample_A.jpg">Enter applicants City, State, Zip. Then please press "OK" button</Message>
+            </IoObject>
+          </IoScreen>
+        </UiScreen>
+      ]]>
+    </Script>
+  </DisplayForm>
+</SerioCommands>
+    """
+    return Response(xml_data, mimetype='text/xml')
+
+
+@app.route('/steapaddressfour', methods=['GET', 'POST'])
+def getStepAddressFour():
+    data = request.form # This will capture the data sent in the request body
+    app.logger.info(data)
+
+    xml_data="""
+<SerioCommands version="1.0" >
+   <DisplayForm>
+      <Script>
+         <![CDATA[
+             <UiScreen>
+            <Operations>
+               <Op type="Submit" action="steapaddressfive">
+               </Op>
+               <Op type="Back" action="./3.xml">
+               </Op>
+            </Operations>
+            <IoScreen>
+               <IoObject>
+                  <Title>String Input</Title>
+                  <Description>xml TextArea Description</Description>
+                  <TextArea id="textarea_id" cpos="Tail">
+                     <InitValue>abscefghijklmn</InitValue>
+                     <MinLength>1</MinLength>
+                     <MaxLength>128</MaxLength>
+                     <Mask>false</Mask>
+                     <LetterTypes>
+                        <LetterType>UpperCase</LetterType>
+                        <LetterType>LowerCase</LetterType>
+                        <LetterType>Glyph</LetterType>
+                     </LetterTypes>
+                  </TextArea>
+               </IoObject>
+            </IoScreen>
+         </UiScreen>
+         ]]>
+      </Script>
+   </DisplayForm>
+</SerioCommands>
+    """
+    return Response(xml_data, mimetype='text/xml')
+
+
+@app.route('/steapaddressfive', methods=['GET', 'POST'])
+def getStepAddressFive():
+    data = request.form # This will capture the data sent in the request body
+    app.logger.info(data)
+
+    xml_data="""
+<SerioCommands version="1.0" >
+   <DisplayForm>
+      <Script>
+         <![CDATA[
+             <UiScreen>
+            <Operations>
+               <Op type="Submit" action="steapaddresssix">
+               </Op>
+               <Op type="Back" action="./3.xml">
+               </Op>
+            </Operations>
+            <IoScreen>
+               <IoObject>
+                  <Title>String Input</Title>
+                  <Description>xml TextArea Description</Description>
+                  <TextArea id="textarea_id" cpos="Tail">
+                     <InitValue>abscefghijklmn</InitValue>
+                     <MinLength>1</MinLength>
+                     <MaxLength>128</MaxLength>
+                     <Mask>false</Mask>
+                     <LetterTypes>
+                        <LetterType>UpperCase</LetterType>
+                        <LetterType>LowerCase</LetterType>
+                        <LetterType>Glyph</LetterType>
+                     </LetterTypes>
+                  </TextArea>
+               </IoObject>
+            </IoScreen>
+         </UiScreen>
+         ]]>
+      </Script>
+   </DisplayForm>
+</SerioCommands>
+    """
+    return Response(xml_data, mimetype='text/xml')
+
+@app.route('/steapaddresssix', methods=['GET', 'POST'])
+def getStepAddressSix():
+    data = request.form # This will capture the data sent in the request body
+    app.logger.info(data)
+
+    xml_data="""
+<SerioCommands version="1.0" >
+   <DisplayForm>
+      <Script>
+         <![CDATA[
+             <UiScreen>
+            <Operations>
+               <Op type="Submit" action="steapaddressseven">
+               </Op>
+               <Op type="Back" action="./4.xml">
+               </Op>
+            </Operations>
+            <IoScreen>
+               <IoObject>
+                  <Title>Numerical Input</Title>
+                  <NumericalArea id="numericalarea_id" cpos="Head">
+                     <InitValue>20</InitValue>
+                     <MinValue>0</MinValue>
+                     <MaxValue>10000</MaxValue>
+                     <Mask>false</Mask>
+                  </NumericalArea>
+               </IoObject>
+            </IoScreen>
+         </UiScreen>
+         ]]>
+      </Script>
+   </DisplayForm>
+</SerioCommands>
+    """
+    return Response(xml_data, mimetype='text/xml')
+
+@app.route('/steapaddressseven', methods=['GET', 'POST'])
+def getStepAddressSeven():
+    data = request.form # This will capture the data sent in the request body
+    app.logger.info(data)
+
+    xml_data="""
+<SerioCommands version="1.0">
+  <DisplayForm>
+    <Script>
+      <![CDATA[
+        <UiScreen>
+          <Title>title</Title>
+          <Operations>
+            <Op type="Submit" action="./ok.xml"></Op>
+            <Op type="Back" action="./back.xml"></Op>
+          </Operations>
+          <IoScreen>
+            <IoObject>
+              <Title>Message Title</Title>
+              <Message imgsrc="./Sample_A.jpg">123 Main Street, Oxford, OH, 45056 capture successfully. Please press "OK" button</Message>
+            </IoObject>
+          </IoScreen>
+        </UiScreen>
+      ]]>
+    </Script>
+  </DisplayForm>
+</SerioCommands>
+    """
+    return Response(xml_data, mimetype='text/xml')
+
+
+@app.route('/heartbeat', methods=['GET', 'POST'])
+def getStepHeartBeat():
+    data = request.form # This will capture the data sent in the request body
+    dbhelper.DatabaseHelper.writeToDatabase("5", str(data))
+
+    xml_data="""
+<SerioCommands version="100">
+<ReadDb>
+ <ReadDbProfiles>
+  <ReadDbProfile>
+  <!-- Page counter-->
+  <Key>1.3.6.1.2.1.43.10.2.1.4.1.1</Key>
+  </ReadDbProfile>
+ </ReadDbProfiles>
+ <JobFinAckUrl>./end.xml</JobFinAckUrl>
+</ReadDb>
+</SerioCommands>
+    """
+    return Response(xml_data, mimetype='text/xml')
